@@ -83,41 +83,6 @@
       padding-left: 1.5rem;
     }
 
-    .search-box {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-box input {
-      padding-right: 40px;
-      border-radius: 25px;
-      border: 2px solid transparent;
-      transition: all 0.3s;
-    }
-
-    .search-box input:focus {
-      border-color: var(--color-gold);
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-    }
-
-    .search-box button {
-      position: absolute;
-      right: 5px;
-      background: var(--color-primary);
-      border: none;
-      color: white;
-      padding: 5px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .search-box button:hover {
-      background: var(--color-secondary);
-      transform: scale(1.05);
-    }
-
     /* Header del carrito */
     .cart-header {
       background: linear-gradient(135deg, #000000, #8B0000);
@@ -157,6 +122,7 @@
       padding: 60px 40px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      grid-column: 1 / -1;
     }
 
     .empty-cart i {
@@ -453,6 +419,100 @@
       font-size: 1rem;
     }
 
+    /* Modal de pago */
+    .modal-pago {
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .modal-pago .modal-header {
+      background: linear-gradient(135deg, #000000, #8B0000);
+      color: white;
+      border-bottom: 3px solid var(--color-gold);
+    }
+
+    .modal-pago .modal-body {
+      padding: 30px;
+    }
+
+    .paso-pago {
+      display: none;
+    }
+
+    .paso-pago.active {
+      display: block;
+    }
+
+    .info-pago {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .qr-code {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .qr-code img {
+      max-width: 250px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      background: white;
+    }
+
+    .datos-transferencia {
+      background: white;
+      border: 2px dashed var(--color-primary);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+    }
+
+    .numero-cuenta {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--color-primary);
+      margin: 10px 0;
+    }
+
+    .instrucciones-pago {
+      background: #e8f4ff;
+      border-left: 4px solid #007bff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .btn-siguiente, .btn-anterior {
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: bold;
+    }
+
+    .comprobante-upload {
+      border: 2px dashed #007bff;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      margin: 20px 0;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .comprobante-upload:hover {
+      background: #f0f8ff;
+      border-color: #0056b3;
+    }
+
+    .comprobante-upload i {
+      font-size: 3rem;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
     /* Responsive */
     @media (max-width: 991px) {
       .main-container {
@@ -488,58 +548,45 @@
     .resumen {
       animation: fadeIn 0.6s ease-out;
     }
+
+    /* Botones de navegación de pasos */
+    .pasos-navegacion {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    /* Modal de Login Requerido */
+    .modal-login {
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .modal-login .modal-header {
+      background: linear-gradient(135deg, #000000, #8B0000);
+      color: white;
+    }
+
+    .btn-login-option {
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-login-option:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <i class="fas fa-wine-bottle"></i> TAMBOS
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-
-          <!-- Dropdown Categorías -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Categorías
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
-              <li><a class="dropdown-item" href="ron.html">Ron</a></li>
-              <li><a class="dropdown-item" href="pisco.html">Pisco</a></li>
-              <li><a class="dropdown-item" href="whisky.html">Whisky</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
-          <li class="nav-item"><a class="nav-link" href="combos.html">Combos</a></li>
-          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-
-          <li class="nav-item">
-            <div class="search-box d-none d-lg-block">
-              <input type="text" class="form-control" placeholder="Buscar productos...">
-              <button><i class="fas fa-search"></i></button>
-            </div>
-          </li>
-
-          <li class="nav-item ms-3">
-            <div class="cart-icon">
-              <a class="nav-link" href="carrito.html">🛒 <span id="contadorCarrito" class="badge bg-danger"></span></a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+ 
 
   <!-- Header del carrito -->
   <div class="cart-header">
@@ -569,12 +616,14 @@
       <div class="mt-4">
         <label for="metodoPago"><i class="fas fa-credit-card"></i> Método de pago:</label>
         <select class="form-select" id="metodoPago">
-          <option>💳 Yape</option>
-          <option>💵 Plin</option>
-          <option>💳 Tarjeta de Crédito/Débito</option>
+          <option value="yape">💳 Yape</option>
+          <option value="plin">💵 Plin</option>
+          <option value="transferencia">🏦 Transferencia Bancaria</option>
+          <option value="efectivo">💰 Efectivo (Contra entrega)</option>
+          <option value="tarjeta">💳 Tarjeta de Crédito/Débito</option>
         </select>
 
-        <button class="btn btn-success" onclick="simularPago()">
+        <button class="btn btn-success" onclick="iniciarProcesoPago()">
           <i class="fas fa-check-circle"></i> Proceder al Pago
         </button>
         <button class="btn btn-danger" onclick="vaciarCarrito()">
@@ -586,21 +635,261 @@
 
   <footer>
     <p>&copy; 2025 Licorería Tambos | Todos los derechos reservados.</p>
-    <p>Tomar Bebidas Alcoholicas en Exceso es Daniño</p>
+    <p>Tomar Bebidas Alcoholicas en Exceso es Dañino</p>
   </footer>
+
+  <!-- Modal de Login Requerido -->
+  <div class="modal fade" id="modalLoginRequerido" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-login">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-user-lock"></i> Acceso Requerido
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-4">
+            <i class="fas fa-shopping-cart fa-3x mb-3" style="color: #8B0000;"></i>
+            <h4>¡Para continuar, necesitas una cuenta!</h4>
+            <p class="text-muted">
+              Para realizar tu pedido y hacer seguimiento, inicia sesión o regístrate.
+            </p>
+          </div>
+          
+          <div class="d-grid gap-3">
+            <button class="btn btn-primary btn-lg btn-login-option" onclick="irALogin()">
+              <i class="fas fa-sign-in-alt me-2"></i> Ya tengo cuenta
+            </button>
+            <button class="btn btn-success btn-lg btn-login-option" onclick="irARegistro()">
+              <i class="fas fa-user-plus me-2"></i> Crear cuenta nueva
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Proceso de Pago -->
+  <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-pago">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPagoTitulo">
+            <i class="fas fa-credit-card"></i> Proceso de Pago
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Paso 1: Confirmar Datos -->
+          <div id="paso1" class="paso-pago active">
+            <h4 class="mb-4">🔍 Confirmar Datos del Pedido</h4>
+            
+            <div class="alert alert-info">
+              <h5><i class="fas fa-shopping-bag"></i> Resumen del Pedido</h5>
+              <div id="resumenPedidoModal"></div>
+            </div>
+
+            <div class="mt-4">
+              <label for="direccionEntrega"><i class="fas fa-map-marker-alt"></i> Dirección de Entrega:</label>
+              <input type="text" class="form-control mb-3" id="direccionEntrega" 
+                     placeholder="Av. Principal #123, Ciudad" required>
+              
+              <label for="telefonoContacto"><i class="fas fa-phone"></i> Teléfono de Contacto:</label>
+              <input type="tel" class="form-control" id="telefonoContacto" 
+                     placeholder="+51 999 888 777" required>
+            </div>
+
+            <div class="pasos-navegacion">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <i class="fas fa-times"></i> Cancelar
+              </button>
+              <button type="button" class="btn btn-primary btn-siguiente" onclick="siguientePaso()">
+                Continuar <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Paso 2: Instrucciones de Pago -->
+          <div id="paso2" class="paso-pago">
+            <div id="contenidoPago">
+              <!-- El contenido se llena dinámicamente según el método -->
+            </div>
+
+            <div class="pasos-navegacion">
+              <button type="button" class="btn btn-outline-secondary btn-anterior" onclick="anteriorPaso()">
+                <i class="fas fa-arrow-left"></i> Anterior
+              </button>
+              <button type="button" class="btn btn-primary btn-siguiente" onclick="siguientePaso()">
+                Continuar <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Paso 3: Confirmar Pago -->
+          <div id="paso3" class="paso-pago">
+            <div class="text-center mb-4">
+              <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+              <h4>✅ Confirmar Pago</h4>
+              <p class="text-muted">Revisa que toda la información sea correcta</p>
+            </div>
+
+            <div class="info-pago">
+              <h5>Detalles del Pedido:</h5>
+              <div id="detallesConfirmacion"></div>
+              
+              <div class="mt-3">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="terminosCondiciones" required>
+                  Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#modalTerminos">Términos y Condiciones</a>
+                </label>
+              </div>
+            </div>
+
+            <div class="pasos-navegacion">
+              <button type="button" class="btn btn-outline-secondary btn-anterior" onclick="anteriorPaso()">
+                <i class="fas fa-arrow-left"></i> Anterior
+              </button>
+              <button type="button" class="btn btn-success" onclick="finalizarPedido()">
+                <i class="fas fa-check"></i> Confirmar y Finalizar Pedido
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Términos y Condiciones -->
+  <div class="modal fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-file-contract"></i> Términos y Condiciones</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <h6>Políticas de Entrega:</h6>
+          <ul>
+            <li>Entrega en 24-48 horas dentro de la ciudad</li>
+            <li>Horario de entrega: 9:00 AM - 8:00 PM</li>
+            <li>Se requiere DNI para entrega de productos</li>
+            <li>No entregamos a menores de edad</li>
+          </ul>
+          
+          <h6>Políticas de Pago:</h6>
+          <ul>
+            <li>Los pagos deben realizarse según las instrucciones proporcionadas</li>
+            <li>El pedido se procesa una vez confirmado el pago</li>
+            <li>Conservar comprobante de pago</li>
+          </ul>
+          
+          <h6>Políticas de Devolución:</h6>
+          <ul>
+            <li>Productos en buen estado pueden devolverse en 24 horas</li>
+            <li>Productos abiertos no son elegibles para devolución</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // ============================================
+    // VARIABLES GLOBALES
+    // ============================================
+    let pasoActual = 1;
+    let metodoPagoSeleccionado = '';
+    let datosPedido = {
+      productos: [],
+      total: 0,
+      direccion: '',
+      telefono: '',
+      metodo_pago: '',
+      cliente_id: null
+    };
+
+    // ============================================
+    // VERIFICACIÓN DE SESIÓN (AGREGADA DE NUEVO)
+    // ============================================
+    async function verificarSesion() {
+        try {
+            const response = await fetch('verificar_sesion.php');
+            const data = await response.json();
+            
+            const userNotLogged = document.getElementById('userNotLogged');
+            const userLogged = document.getElementById('userLogged');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userIcon = document.getElementById('userIcon');
+            
+            if (data.logged_in) {
+                // Usuario logueado
+                if (userNotLogged) userNotLogged.style.display = 'none';
+                if (userLogged) userLogged.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = data.cliente.nombre.split(' ')[0];
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user-check';
+                    userIcon.style.color = '#28a745';
+                }
+                // Guardar ID del cliente para el pedido
+                datosPedido.cliente_id = data.cliente.id;
+                return true;
+            } else {
+                // Usuario no logueado
+                if (userNotLogged) userNotLogged.style.display = 'block';
+                if (userLogged) userLogged.style.display = 'none';
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user';
+                    userIcon.style.color = '';
+                }
+                datosPedido.cliente_id = null;
+                return false;
+            }
+        } catch (error) {
+            console.error('Error al verificar sesión:', error);
+            // Si hay error, mostrar estado no logueado
+            const userNotLogged = document.getElementById('userNotLogged');
+            const userLogged = document.getElementById('userLogged');
+            const userIcon = document.getElementById('userIcon');
+            
+            if (userNotLogged) userNotLogged.style.display = 'block';
+            if (userLogged) userLogged.style.display = 'none';
+            if (userIcon) {
+                userIcon.className = 'fas fa-user';
+                userIcon.style.color = '';
+            }
+            datosPedido.cliente_id = null;
+            return false;
+        }
+    }
+
+    // ============================================
+    // FUNCIÓN DE CERRAR SESIÓN (AGREGADA DE NUEVO)
+    // ============================================
+    function cerrarSesion() {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+            window.location.href = 'logout.php';
+        }
+    }
+
+    // ============================================
+    // FUNCIONES DEL CARRITO
+    // ============================================
     function mostrarCarrito() {
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      let carrito = JSON.parse(localStorage.getItem("carrito_tambos") || "[]");
       let contenedor = document.getElementById("listaCarrito");
       contenedor.innerHTML = "";
       let total = 0;
 
-      // Filtrar productos válidos
       carrito = carrito.filter(p => p && p.precio && p.nombre);
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+      localStorage.setItem("carrito_tambos", JSON.stringify(carrito));
 
       if (carrito.length === 0) {
         contenedor.innerHTML = `
@@ -615,8 +904,8 @@
             </div>
           </div>
         `;
-        document.getElementById("subtotal").innerHTML = '<span>Subtotal:</span><span>S/ 0.00</span>';
-        document.getElementById("total").innerHTML = '<span>Total:</span><span>S/ 0.00</span>';
+        actualizarResumen(0);
+        actualizarContadorCarrito();
         return;
       }
 
@@ -629,11 +918,11 @@
         contenedor.innerHTML += `
         <div class="col-lg-6 mb-4">
           <div class="card p-3">
-            <img src="${p.img || ''}" class="card-img-top mb-3" alt="${p.nombre}">
+            <img src="${p.imagen || p.img || 'https://via.placeholder.com/300x200?text=Producto'}" class="card-img-top mb-3" alt="${p.nombre}">
             <h5>${p.nombre || 'Producto sin nombre'}</h5>
             <div class="product-meta">
-              <p class="mb-1"><i class="fas fa-tag"></i> <strong>Marca:</strong> ${p.marca || 'Sin especificar'}</p>
-              <p class="mb-0"><i class="fas fa-wine-bottle"></i> <strong>Tamaño:</strong> ${p.ml || '?'} ml</p>
+              <p class="mb-1"><i class="fas fa-tag"></i> <strong>Categoría:</strong> ${p.categoria || 'Bebida'}</p>
+              <p class="mb-0"><i class="fas fa-info-circle"></i> ${p.descripcion || ''}</p>
             </div>
             <div class="quantity-control">
               <label><i class="fas fa-sort-numeric-up"></i> Cantidad:</label>
@@ -650,47 +939,378 @@
         </div>`;
       });
 
+      actualizarResumen(total);
+      actualizarContadorCarrito();
+    }
+
+    function actualizarResumen(total) {
       document.getElementById("subtotal").innerHTML = `<span>Subtotal:</span><span>S/ ${total.toFixed(2)}</span>`;
       document.getElementById("total").innerHTML = `<span>Total:</span><span>S/ ${total.toFixed(2)}</span>`;
-      document.getElementById("contadorCarrito").textContent = carrito.length;
     }
 
     function cambiarCantidad(i, nuevaCantidad) {
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-      carrito[i].cantidad = parseInt(nuevaCantidad);
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+      let carrito = JSON.parse(localStorage.getItem("carrito_tambos") || "[]");
+      carrito[i].cantidad = Math.max(1, parseInt(nuevaCantidad) || 1);
+      localStorage.setItem("carrito_tambos", JSON.stringify(carrito));
       mostrarCarrito();
     }
 
     function eliminarItem(i) {
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      let carrito = JSON.parse(localStorage.getItem("carrito_tambos") || "[]");
       carrito.splice(i, 1);
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+      localStorage.setItem("carrito_tambos", JSON.stringify(carrito));
       mostrarCarrito();
     }
 
     function vaciarCarrito() {
       if (confirm("¿Estás seguro de que deseas vaciar todo el carrito?")) {
-        localStorage.removeItem("carrito");
+        localStorage.removeItem("carrito_tambos");
         mostrarCarrito();
       }
     }
 
-    function simularPago() {
-      let metodo = document.getElementById("metodoPago").value;
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    // ============================================
+    // PROCESO DE PAGO COMPLETO CON VERIFICACIÓN
+    // ============================================
+    async function iniciarProcesoPago() {
+      let carrito = JSON.parse(localStorage.getItem("carrito_tambos") || "[]");
+      
       if (carrito.length === 0) {
         alert("Tu carrito está vacío");
         return;
       }
-      alert(`✅ Pago simulado con ${metodo}. ¡Gracias por tu compra!`);
-      localStorage.removeItem("carrito");
-      mostrarCarrito();
+
+      // VERIFICAR SI EL USUARIO ESTÁ LOGUEADO
+      const estaLogueado = await verificarSesion();
+      
+      if (!estaLogueado) {
+        // Mostrar modal de login requerido
+        const modal = new bootstrap.Modal(document.getElementById('modalLoginRequerido'));
+        modal.show();
+        return;
+      }
+
+      // Si está logueado, continuar con el proceso de pago
+      procederConPago(carrito);
     }
 
-    mostrarCarrito();
+    function procederConPago(carrito) {
+      // Obtener datos iniciales
+      metodoPagoSeleccionado = document.getElementById("metodoPago").value;
+      
+      // Calcular total
+      let total = carrito.reduce((sum, p) => {
+        let cantidad = p.cantidad ? parseInt(p.cantidad) : 1;
+        let precio = p.precio ? parseFloat(p.precio) : 0;
+        return sum + (precio * cantidad);
+      }, 0);
+
+      // Guardar datos del pedido
+      datosPedido.productos = carrito;
+      datosPedido.total = total;
+      datosPedido.metodo_pago = metodoPagoSeleccionado;
+
+      // Mostrar resumen en modal
+      mostrarResumenPedidoModal(carrito, total);
+      
+      // Mostrar modal de pago
+      const modal = new bootstrap.Modal(document.getElementById('modalPago'));
+      modal.show();
+      
+      // Configurar título del modal según método de pago
+      const titulos = {
+        'yape': '💳 Pago con Yape',
+        'plin': '💵 Pago con Plin',
+        'transferencia': '🏦 Transferencia Bancaria',
+        'efectivo': '💰 Pago en Efectivo',
+        'tarjeta': '💳 Pago con Tarjeta'
+      };
+      
+      document.getElementById('modalPagoTitulo').innerHTML = 
+        `<i class="fas fa-credit-card"></i> ${titulos[metodoPagoSeleccionado] || 'Proceso de Pago'}`;
+    }
+
+    function mostrarResumenPedidoModal(carrito, total) {
+      let html = `<p><strong>Productos (${carrito.length}):</strong></p>`;
+      carrito.forEach(p => {
+        let cantidad = p.cantidad || 1;
+        let precio = p.precio || 0;
+        html += `<div class="d-flex justify-content-between border-bottom py-2">
+                   <span>${p.nombre} x${cantidad}</span>
+                   <span>S/ ${(precio * cantidad).toFixed(2)}</span>
+                 </div>`;
+      });
+      html += `<div class="d-flex justify-content-between mt-3 pt-2 border-top">
+                 <strong>Total a pagar:</strong>
+                 <strong class="text-primary">S/ ${total.toFixed(2)}</strong>
+               </div>`;
+      
+      document.getElementById('resumenPedidoModal').innerHTML = html;
+    }
+
+    function siguientePaso() {
+      // Validar paso actual
+      if (pasoActual === 1) {
+        if (!validarPaso1()) return;
+        datosPedido.direccion = document.getElementById('direccionEntrega').value;
+        datosPedido.telefono = document.getElementById('telefonoContacto').value;
+        mostrarInstruccionesPago();
+      }
+      
+      // Ocultar paso actual y mostrar siguiente
+      document.getElementById('paso' + pasoActual).classList.remove('active');
+      pasoActual++;
+      document.getElementById('paso' + pasoActual).classList.add('active');
+    }
+
+    function anteriorPaso() {
+      document.getElementById('paso' + pasoActual).classList.remove('active');
+      pasoActual--;
+      document.getElementById('paso' + pasoActual).classList.add('active');
+    }
+
+    function validarPaso1() {
+      const direccion = document.getElementById('direccionEntrega').value.trim();
+      const telefono = document.getElementById('telefonoContacto').value.trim();
+      
+      if (!direccion) {
+        alert('Por favor ingresa la dirección de entrega');
+        return false;
+      }
+      
+      if (!telefono) {
+        alert('Por favor ingresa el teléfono de contacto');
+        return false;
+      }
+      
+      return true;
+    }
+
+    function mostrarInstruccionesPago() {
+      let contenido = '';
+      
+      switch(metodoPagoSeleccionado) {
+        case 'yape':
+          contenido = mostrarInstruccionesYape();
+          break;
+        case 'plin':
+          contenido = mostrarInstruccionesPlin();
+          break;
+        case 'transferencia':
+          contenido = mostrarInstruccionesTransferencia();
+          break;
+        case 'tarjeta':
+          contenido = mostrarInstruccionesTarjeta();
+          break;
+        case 'efectivo':
+          contenido = mostrarInstruccionesEfectivo();
+          break;
+      }
+      
+      document.getElementById('contenidoPago').innerHTML = contenido;
+      
+      // Preparar detalles para confirmación
+      let detalles = `
+        <p><strong>Cliente:</strong> ${datosPedido.cliente_id ? 'Usuario registrado' : 'Invitado'}</p>
+        <p><strong>Método de pago:</strong> ${metodoPagoSeleccionado.toUpperCase()}</p>
+        <p><strong>Dirección de entrega:</strong> ${datosPedido.direccion}</p>
+        <p><strong>Teléfono de contacto:</strong> ${datosPedido.telefono}</p>
+        <p><strong>Total a pagar:</strong> S/ ${datosPedido.total.toFixed(2)}</p>
+        <p><strong>Fecha estimada de entrega:</strong> ${obtenerFechaEntrega()}</p>
+      `;
+      
+      document.getElementById('detallesConfirmacion').innerHTML = detalles;
+    }
+
+    function obtenerFechaEntrega() {
+      const hoy = new Date();
+      hoy.setDate(hoy.getDate() + 1);
+      return hoy.toLocaleDateString('es-PE', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    }
+
+    // Funciones para mostrar instrucciones específicas
+    function mostrarInstruccionesYape() {
+      return `
+        <div class="text-center">
+          <h4><i class="fas fa-mobile-alt"></i> Pago con Yape</h4>
+          <p class="text-muted mb-4">Realiza el pago desde tu app Yape</p>
+          
+          <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=YAPE-${datosPedido.total}-TAMBOS-${Date.now()}" alt="QR Yape">
+          </div>
+          
+          <div class="datos-transferencia mt-4">
+            <h5><i class="fas fa-info-circle"></i> Datos para Yape:</h5>
+            <p class="numero-cuenta">📱 Celular: +51 999 888 777</p>
+            <p><strong>Nombre:</strong> LICORERÍA TAMBOS</p>
+            <p><strong>Monto a transferir:</strong> S/ ${datosPedido.total.toFixed(2)}</p>
+            <p><strong>Referencia:</strong> TAMBOS-${Date.now().toString().slice(-6)}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function mostrarInstruccionesPlin() {
+      return `
+        <div class="text-center">
+          <h4><i class="fas fa-mobile-alt"></i> Pago con Plin</h4>
+          <p class="text-muted mb-4">Realiza el pago desde tu app Plin</p>
+          
+          <div class="datos-transferencia">
+            <h5><i class="fas fa-info-circle"></i> Datos para Plin:</h5>
+            <p class="numero-cuenta">📱 DNI: 87654321</p>
+            <p><strong>Nombre:</strong> LICORERÍA TAMBOS S.A.C.</p>
+            <p><strong>Monto a transferir:</strong> S/ ${datosPedido.total.toFixed(2)}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function mostrarInstruccionesTransferencia() {
+      return `
+        <div class="text-center">
+          <h4><i class="fas fa-university"></i> Transferencia Bancaria</h4>
+          <p class="text-muted mb-4">Realiza la transferencia desde tu banco</p>
+          
+          <div class="datos-transferencia">
+            <h5><i class="fas fa-info-circle"></i> Datos Bancarios:</h5>
+            <p><strong>Banco:</strong> BANCO DE LA NACION</p>
+            <p class="numero-cuenta">🏦 N° de Cuenta: 123-456789-1-01</p>
+            <p><strong>Titular:</strong> LICORERÍA TAMBOS S.A.C.</p>
+            <p><strong>Monto a transferir:</strong> S/ ${datosPedido.total.toFixed(2)}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function mostrarInstruccionesTarjeta() {
+      return `
+        <div class="text-center">
+          <h4><i class="fas fa-credit-card"></i> Pago con Tarjeta</h4>
+          <p class="text-muted mb-4">Proceso seguro con nuestra pasarela de pago</p>
+          
+          <div class="datos-transferencia">
+            <h5><i class="fas fa-lock"></i> Pago Seguro SSL</h5>
+            <p><i class="fas fa-shield-alt text-success fa-2x mb-3"></i></p>
+            <p>Tus datos están protegidos con encriptación SSL de 256 bits</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function mostrarInstruccionesEfectivo() {
+      return `
+        <div class="text-center">
+          <h4><i class="fas fa-money-bill-wave"></i> Pago en Efectivo</h4>
+          <p class="text-muted mb-4">Paga al momento de recibir tu pedido</p>
+          
+          <div class="datos-transferencia">
+            <h5><i class="fas fa-truck"></i> Entrega Contra Pago</h5>
+            <p><i class="fas fa-user-check fa-3x text-primary mb-3"></i></p>
+            <p>Nuestro repartidor te entregará los productos y recibirá el pago</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // ============================================
+    // FUNCIONES PARA LOGIN/REGISTRO
+    // ============================================
+    function irALogin() {
+      // Guardar carrito en sessionStorage
+      const carrito = localStorage.getItem("carrito_tambos");
+      sessionStorage.setItem('carrito_pendiente', carrito);
+      
+      // Redirigir a login
+      window.location.href = 'login.html?redirect=carrito.html';
+    }
+
+    function irARegistro() {
+      // Guardar carrito en sessionStorage
+      const carrito = localStorage.getItem("carrito_tambos");
+      sessionStorage.setItem('carrito_pendiente', carrito);
+      
+      // Redirigir a registro
+      window.location.href = 'registro.html?redirect=carrito.html';
+    }
+
+    function finalizarPedido() {
+      if (!document.getElementById('terminosCondiciones').checked) {
+        alert('Debes aceptar los términos y condiciones');
+        return;
+      }
+
+      // Aquí enviarías los datos al servidor
+      enviarPedidoAlServidor(datosPedido);
+    }
+
+    // ============================================
+    // ENVIAR PEDIDO AL SERVIDOR
+    // ============================================
+    async function enviarPedidoAlServidor(datosPedido) {
+      try {
+        // Simular envío al servidor
+        const pedidoId = 'PED-' + Date.now().toString().slice(-8);
+        
+        // Mostrar mensaje de éxito
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalPago'));
+        modal.hide();
+        
+        alert(`✅ ¡Pedido realizado con éxito!\n\n📦 Número de pedido: ${pedidoId}\n💰 Total: S/ ${datosPedido.total.toFixed(2)}\n📅 Fecha estimada: ${obtenerFechaEntrega()}\n\nGuarda tu número de pedido para seguimiento.`);
+        
+        // Limpiar carrito
+        localStorage.removeItem("carrito_tambos");
+        
+        // Redirigir
+        setTimeout(() => {
+          window.location.href = 'mi-cuenta.html?pedido_exitoso=' + pedidoId;
+        }, 2000);
+        
+      } catch (error) {
+        alert('❌ Error al procesar el pedido. Intenta nuevamente.');
+      }
+    }
+
+    // ============================================
+    // FUNCIONES AUXILIARES
+    // ============================================
+    function actualizarContadorCarrito() {
+      const carrito = JSON.parse(localStorage.getItem("carrito_tambos") || "[]");
+      const totalItems = carrito.reduce((total, producto) => {
+        return total + (producto.cantidad || 1);
+      }, 0);
+      
+      const contador = document.getElementById('contadorCarrito');
+      if (contador) {
+        contador.textContent = totalItems;
+        contador.style.display = totalItems > 0 ? 'inline' : 'none';
+      }
+    }
+
+    // ============================================
+    // INICIALIZACIÓN
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Verificar sesión
+      await verificarSesion();
+      
+      // Mostrar carrito
+      mostrarCarrito();
+      
+      // Verificar si hay carrito pendiente después de login/registro
+      const carritoPendiente = sessionStorage.getItem('carrito_pendiente');
+      if (carritoPendiente) {
+        localStorage.setItem("carrito_tambos", carritoPendiente);
+        sessionStorage.removeItem('carrito_pendiente');
+        mostrarCarrito();
+      }
+    });
   </script>
 
 </body>
-
 </html>

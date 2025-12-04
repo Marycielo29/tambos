@@ -206,53 +206,573 @@
     </style>
 </head>
 <body>
+<!-- NAVBAR ACTUALIZADO - Copia esto en TODAS tus páginas -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fas fa-wine-bottle"></i> TAMBOS
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-wine-bottle"></i> TAMBOS
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <!-- Dropdown Categorías -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Categorías
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
+            <li><a class="dropdown-item" href="ron.html">Ron</a></li>
+            <li><a class="dropdown-item" href="pisco.html">Pisco</a></li>
+            <li><a class="dropdown-item" href="whisky.html">Whisky</a></li>
+            
+          </ul>
+        </li>
 
-                    <!-- Dropdown Categorías -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorías
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
-                            <li><a class="dropdown-item" href="ron.html">Ron</a></li>
-                            <li><a class="dropdown-item" href="pisco.html">Pisco</a></li>
-                            <li><a class="dropdown-item" href="whisky.html">Whisky</a></li>
-                        </ul>
-                    </li>
+        <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
+        <li class="nav-item"><a class="nav-link" href="combos.html">Combos</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="combos.html">Combos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        <!-- BARRA DE BÚSQUEDA FUNCIONAL -->
+        <li class="nav-item">
+          <div class="search-box d-none d-lg-block">
+            <input type="text" class="form-control" id="searchInput" 
+                   placeholder="Buscar productos..." 
+                   onkeypress="if(event.key === 'Enter') buscarProductos()">
+            <button onclick="buscarProductos()"><i class="fas fa-search"></i></button>
+            
+            <!-- Resultados de búsqueda -->
+            <div class="search-results" id="searchResults"></div>
+          </div>
+        </li>
 
-                    <li class="nav-item">
-                        <div class="search-box d-none d-lg-block">
-                            <input type="text" class="form-control" placeholder="Buscar productos...">
-                            <button><i class="fas fa-search"></i></button>
-                        </div>
-                    </li>
-
-                    <li class="nav-item ms-3">
-                        <div class="cart-icon">
-                            <a class="nav-link" href="carrito.html">🛒 <span id="contadorCarrito" class="badge bg-danger"></span></a>
-                        </div>
-                    </li>
-                </ul>
+  <!-- ÍCONO DE USUARIO -->
+        <li class="nav-item dropdown ms-3">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+             data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user" id="userIcon"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <div id="userNotLogged">
+              <li><h6 class="dropdown-header">Mi Cuenta</h6></li>
+              <li><a class="dropdown-item" href="login.html">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+              </a></li>
+              <li><a class="dropdown-item" href="registro.html">
+                <i class="fas fa-user-plus"></i> Registrarse
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="contacto.html">
+                <i class="fas fa-question-circle"></i> Ayuda
+              </a></li>
             </div>
+            
+            <div id="userLogged" style="display: none;">
+              <li><h6 class="dropdown-header" id="userNameDisplay">Usuario</h6></li>
+              <li><a class="dropdown-item" href="mi-cuenta.html">
+                <i class="fas fa-user-circle"></i> Mi Perfil
+              </a></li>
+              <li><a class="dropdown-item" href="#">
+                <i class="fas fa-shopping-bag"></i> Mis Pedidos
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="cerrarSesion()">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </a></li>
+            </div>
+          </ul>
+        </li>
+        
+        <!-- ÍCONO DEL CARRITO -->
+        <!-- ÍCONO DEL CARRITO -->
+      <li class="nav-item ms-3">
+  <div class="cart-icon">
+    <a class="nav-link position-relative" href="carrito.html">
+      <i class="fas fa-shopping-cart fs-5"></i>
+      <span id="contadorCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+    </a>
+  </div>
+</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ESTILOS PARA LA BÚSQUEDA - Agrega esto en tu <style> -->
+<style>
+  /* Estilos para la barra de búsqueda */
+  .search-box {
+    position: relative;
+    width: 300px;
+  }
+
+  .search-box input {
+    border-radius: 25px;
+    padding-right: 45px;
+    border: 2px solid var(--color-primary);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s;
+  }
+
+  .search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .search-box input:focus {
+    background: white;
+    color: #333;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  }
+
+  .search-box input:focus::placeholder {
+    color: #666;
+  }
+
+  .search-box button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-primary);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .search-box button:hover {
+    background: var(--color-secondary);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  /* Resultados de búsqueda */
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    margin-top: 5px;
+  }
+
+  .search-result-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .search-result-item:hover {
+    background: #f8f9fa;
+  }
+
+  .search-result-item:last-child {
+    border-bottom: none;
+  }
+
+  .search-result-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+  .search-result-info {
+    flex: 1;
+  }
+
+  .search-result-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+  }
+
+  .search-result-price {
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .search-result-category {
+    font-size: 0.8rem;
+    color: #666;
+    background: #f1f1f1;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+
+  .no-results {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+  }
+
+  .search-result-item .btn-sm {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 991px) {
+    .search-box {
+      width: 100%;
+      margin: 10px 0;
+    }
+    
+    .search-results {
+      position: fixed;
+      top: 60px;
+      left: 15px;
+      right: 15px;
+      max-height: 300px;
+    }
+  }
+</style>
+
+<!-- SCRIPT DE BÚSQUEDA - Agrega esto antes de </body> -->
+<script>
+  // ============================================
+  // BASE DE DATOS DE PRODUCTOS (simulada)
+  // ============================================
+  const productosTambos = [
+    {
+      id: 1,
+      nombre: "Ron Cartavio X.O",
+      categoria: "Ron",
+      precio: 85.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2022/08/011040005-1.jpg",
+      descripcion: "Ron premium añejo"
+    },
+    {
+      id: 2,
+      nombre: "Pisco Quebranta",
+      categoria: "Pisco",
+      precio: 45.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2021/12/010060005-1.jpg",
+      descripcion: "Pisco puro quebranta"
+    },
+    {
+      id: 3,
+      nombre: "Whisky Johnnie Walker",
+      categoria: "Whisky",
+      precio: 120.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2021/12/015018001-2.jpg",
+      descripcion: "Whisky escocés"
+    },
+    {
+      id: 4,
+      nombre: "Vino Tinto Rose",
+      categoria: "Vino",
+      precio: 16.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2022/08/013263009-1.jpg",
+      descripcion: "Vino tinto premium"
+    },
+    {
+      id: 5,
+      nombre: "Cerveza Pilsen",
+      categoria: "Cerveza",
+      precio: 8.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2022/05/SIX-PACK-CERVEZA-PILSEN-X-310-ML.jpg",
+      descripcion: "Cerveza lager"
+    },
+    {
+      id: 6,
+      nombre: "Tequila Casa Dragones",
+      categoria: "Tequila",
+      precio: 428.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2025/05/012017001.jpg",
+      descripcion: "Tequila premium blanco"
+    },
+    {
+      id: 7,
+      nombre: "Gin Beefeater",
+      categoria: "Gin",
+      precio: 134.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2021/12/014003008-1.jpg",
+      descripcion: "Gin londinense"
+    },
+    {
+      id: 8,
+      nombre: "Vodka Smirnoff",
+      categoria: "Vodka",
+      precio: 36.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2025/01/014021018-1.jpg",
+      descripcion: "Vodka de trigo"
+    },
+    {
+      id: 9,
+      nombre: "Champagne Brut",
+      categoria: "Champagne",
+      precio: 89.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2023/02/012011003.jpg",
+      descripcion: "Champagne francés"
+    },
+    {
+      id: 10,
+      nombre: "Whisky Chivas Regal",
+      categoria: "Whisky",
+      precio: 150.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2024/09/013538014.jpg",
+      descripcion: "Whisky escocés 12 años"
+    }
+  ];
+
+  // ============================================
+  // FUNCIÓN DE BÚSQUEDA
+  // ============================================
+  function buscarProductos() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const query = searchInput.value.trim().toLowerCase();
+    
+    if (!query) {
+      searchResults.style.display = 'none';
+      return;
+    }
+    
+    // Filtrar productos
+    const resultados = productosTambos.filter(producto => 
+      producto.nombre.toLowerCase().includes(query) ||
+      producto.categoria.toLowerCase().includes(query) ||
+      producto.descripcion.toLowerCase().includes(query)
+    );
+    
+    // Mostrar resultados
+    if (resultados.length > 0) {
+      let html = '';
+      resultados.forEach(producto => {
+        html += `
+          <div class="search-result-item" onclick="seleccionarProducto(${producto.id})">
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="search-result-img">
+            <div class="search-result-info">
+              <div class="search-result-name">${producto.nombre}</div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="search-result-price">S/ ${producto.precio.toFixed(2)}</span>
+                <span class="search-result-category">${producto.categoria}</span>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); agregarAlCarritoBusqueda(${producto.id})">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        `;
+      });
+      searchResults.innerHTML = html;
+      searchResults.style.display = 'block';
+    } else {
+      searchResults.innerHTML = `
+        <div class="no-results">
+          <i class="fas fa-search fa-2x mb-3 text-muted"></i>
+          <p>No se encontraron productos</p>
+          <p class="small">Intenta con otra palabra clave</p>
         </div>
-    </nav>
+      `;
+      searchResults.style.display = 'block';
+    }
+  }
+
+  // ============================================
+  // FUNCIONES AUXILIARES DE BÚSQUEDA
+  // ============================================
+  function seleccionarProducto(id) {
+    const producto = productosTambos.find(p => p.id === id);
+    if (producto) {
+      // Redirigir a la página de la categoría con el producto
+      const categoriaPagina = {
+        'Ron': 'ron.html',
+        'Pisco': 'pisco.html',
+        'Whisky': 'whisky.html',
+        'Vino': 'vino.html',
+        'Cerveza': 'cerveza.html',
+        'Tequila': 'tequila.html',
+        'Gin': 'gin.html',
+        'Vodka': 'vodka.html',
+        'Champagne': 'champagne.html'
+      };
+      
+      const pagina = categoriaPagina[producto.categoria] || 'index.html';
+      window.location.href = pagina + '?producto=' + id;
+      
+      // Limpiar búsqueda
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchResults').style.display = 'none';
+    }
+  }
+
+  function agregarAlCarritoBusqueda(id) {
+    const producto = productosTambos.find(p => p.id === id);
+    if (producto) {
+      // Agregar al carrito
+      agregarAlCarrito(producto);
+      
+      // Mostrar notificación
+      mostrarNotificacionBusqueda(`✅ ${producto.nombre} agregado al carrito`);
+      
+      // Limpiar búsqueda
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchResults').style.display = 'none';
+      
+      // Actualizar contador
+      actualizarContadorCarritoBusqueda();
+    }
+  }
+
+  function agregarAlCarrito(producto) {
+    let carrito = JSON.parse(localStorage.getItem("carrito_tambos")) || [];
+    
+    // Verificar si ya existe
+    const existente = carrito.find(p => p.id === producto.id);
+    if (existente) {
+      existente.cantidad = (existente.cantidad || 1) + 1;
+    } else {
+      producto.cantidad = 1;
+      carrito.push(producto);
+    }
+    
+    localStorage.setItem("carrito_tambos", JSON.stringify(carrito));
+  }
+
+  function actualizarContadorCarritoBusqueda() {
+    const contador = document.getElementById('contadorCarrito');
+    if (contador) {
+      const carrito = JSON.parse(localStorage.getItem("carrito_tambos")) || [];
+      const totalItems = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
+      contador.textContent = totalItems;
+      contador.style.display = totalItems > 0 ? 'inline' : 'none';
+    }
+  }
+
+  function mostrarNotificacionBusqueda(mensaje) {
+    // Crear notificación temporal
+    const notificacion = document.createElement('div');
+    notificacion.className = 'alert alert-success position-fixed';
+    notificacion.style.cssText = `
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      min-width: 300px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: slideIn 0.3s ease;
+    `;
+    notificacion.innerHTML = `
+      <div class="d-flex align-items-center">
+        <i class="fas fa-check-circle me-2"></i>
+        <span>${mensaje}</span>
+      </div>
+    `;
+    
+    document.body.appendChild(notificacion);
+    
+    setTimeout(() => {
+      notificacion.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => notificacion.remove(), 300);
+    }, 3000);
+  }
+
+  // ============================================
+  // MANEJADORES DE EVENTOS
+  // ============================================
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar contador del carrito
+    actualizarContadorCarritoBusqueda();
+    
+    // Cerrar resultados al hacer clic fuera
+    document.addEventListener('click', function(event) {
+      const searchBox = document.querySelector('.search-box');
+      const searchResults = document.getElementById('searchResults');
+      
+      if (searchResults && !searchBox.contains(event.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+    
+    // Búsqueda en tiempo real
+    const searchInput = document.getElementById('searchInput');
+    let searchTimeout;
+    
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(buscarProductos, 300);
+    });
+    
+    // Limpiar búsqueda al presionar Escape
+    searchInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        this.value = '';
+        document.getElementById('searchResults').style.display = 'none';
+      }
+    });
+  });
+
+  // ============================================
+  // FUNCIONES DE AUTENTICACIÓN (simplificadas)
+  // ============================================
+  function estaLogueado() {
+    return localStorage.getItem('usuario_tambos') !== null;
+  }
+
+  function obtenerUsuario() {
+    const usuario = localStorage.getItem('usuario_tambos');
+    return usuario ? JSON.parse(usuario) : null;
+  }
+
+  function cerrarSesion() {
+    if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+      localStorage.removeItem('usuario_tambos');
+      actualizarEstadoUsuario();
+      window.location.href = 'index.html';
+    }
+  }
+
+  function actualizarEstadoUsuario() {
+    const usuario = obtenerUsuario();
+    const userNotLogged = document.getElementById('userNotLogged');
+    const userLogged = document.getElementById('userLogged');
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const userIcon = document.getElementById('userIcon');
+    
+    if (usuario) {
+      if (userNotLogged) userNotLogged.style.display = 'none';
+      if (userLogged) userLogged.style.display = 'block';
+      if (userNameDisplay) userNameDisplay.textContent = usuario.nombre.split(' ')[0];
+      if (userIcon) {
+        userIcon.className = 'fas fa-user-check';
+        userIcon.style.color = '#4CAF50';
+      }
+    } else {
+      if (userNotLogged) userNotLogged.style.display = 'block';
+      if (userLogged) userLogged.style.display = 'none';
+      if (userIcon) {
+        userIcon.className = 'fas fa-user';
+        userIcon.style.color = '';
+      }
+    }
+  }
+
+  // Inicializar estado del usuario
+  document.addEventListener('DOMContentLoaded', actualizarEstadoUsuario);
+</script>
 
     <!-- Header de Contacto -->
     <div class="contact-header">
@@ -468,6 +988,66 @@
                 }
             });
         });
+    </script>
+      <script>
+    // ============================================
+    // VERIFICACIÓN DE SESIÓN
+    // ============================================
+    async function actualizarEstadoUsuarioPromocion() {
+        try {
+            const response = await fetch('verificar_sesion.php');
+            const data = await response.json();
+            
+            const userNotLogged = document.getElementById('userNotLogged');
+            const userLogged = document.getElementById('userLogged');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userIcon = document.getElementById('userIcon');
+            
+            if (data.logged_in) {
+                // Usuario logueado
+                if (userNotLogged) userNotLogged.style.display = 'none';
+                if (userLogged) userLogged.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = data.cliente.nombre.split(' ')[0];
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user-check';
+                    userIcon.style.color = '#28a745';
+                }
+            } else {
+                // Usuario no logueado
+                if (userNotLogged) userNotLogged.style.display = 'block';
+                if (userLogged) userLogged.style.display = 'none';
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user';
+                    userIcon.style.color = '';
+                }
+            }
+        } catch (error) {
+            console.error('Error al verificar sesión:', error);
+        }
+    }
+
+    // ============================================
+    // FUNCIÓN DE CERRAR SESIÓN
+    // ============================================
+    function cerrarSesion() {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+            window.location.href = 'logout.php';
+        }
+    }
+
+    // ============================================
+    // LLAMAR A LA VERIFICACIÓN AL CARGAR LA PÁGINA
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Actualizar estado del usuario
+        await actualizarEstadoUsuarioPromocion();
+        
+        // Configurar botón de cerrar sesión
+        const btnCerrarSesion = document.querySelector('[onclick*="cerrarSesion"]');
+        if (btnCerrarSesion) {
+            btnCerrarSesion.onclick = cerrarSesion;
+        }
+    });
     </script>
 </body>
 </html>

@@ -30,7 +30,9 @@
       color: var(--color-dark);
     }
 
-
+    .navbar {
+      background-color: var(--color-primary) !important;
+    }
 
     /* Hero Section */
     .combos-hero {
@@ -48,6 +50,49 @@
       margin-bottom: 1rem;
     }
 
+    /* Filtros */
+    .campaign-filters {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--color-gray);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-dark);
+    }
+
+    .filter-btn:hover {
+      background: var(--color-accent);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .filter-btn.active {
+      background: var(--color-primary);
+      color: white;
+      box-shadow: 0 5px 15px rgba(139, 21, 56, 0.3);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 40px 0;
+      color: var(--color-primary);
+    }
+
     /* Combo Cards */
     .combo-card {
       background: var(--color-light);
@@ -57,6 +102,7 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
       transition: all 0.4s ease;
       border: 1px solid #f0f0f0;
+      position: relative;
     }
 
     .combo-card:hover {
@@ -75,6 +121,11 @@
       }
     }
 
+    .combo-image-section {
+      position: relative;
+      overflow: hidden;
+    }
+
     .combo-image-section img {
       width: 100%;
       height: 100%;
@@ -86,6 +137,31 @@
       transform: scale(1.1);
     }
 
+    .combo-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--color-accent);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .campaign-tag {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
     .combo-content-section {
       padding: 40px;
     }
@@ -94,6 +170,13 @@
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 15px;
+      color: var(--color-primary);
+    }
+
+    .combo-description {
+      color: #666;
+      margin-bottom: 25px;
+      line-height: 1.6;
     }
 
     /* Product Mini Cards */
@@ -106,6 +189,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      margin-bottom: 15px;
     }
 
     .producto-mini-card:hover {
@@ -116,7 +200,7 @@
 
     .producto-mini-card img {
       width: 100%;
-      height: 180px; /* agrandadas */
+      height: 180px;
       object-fit: cover;
       transition: transform 0.3s ease;
     }
@@ -155,58 +239,291 @@
       color: var(--color-primary);
       margin-bottom: 10px;
     }
+
+    .agregar-btn {
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    .agregar-btn:hover {
+      background: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Estilos para la barra de búsqueda */
+    .search-box {
+      position: relative;
+      width: 300px;
+    }
+
+    .search-box input {
+      border-radius: 25px;
+      padding-right: 45px;
+      border: 2px solid var(--color-primary);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .search-box input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .search-box input:focus {
+      background: white;
+      color: #333;
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .search-box input:focus::placeholder {
+      color: #666;
+    }
+
+    .search-box button {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--color-primary);
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .search-box button:hover {
+      background: var(--color-accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Resultados de búsqueda */
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+      margin-top: 5px;
+    }
+
+    .search-result-item {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-result-item:hover {
+      background: #f8f9fa;
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    .search-result-info {
+      flex: 1;
+    }
+
+    .search-result-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 2px;
+      font-size: 0.9rem;
+    }
+
+    .search-result-price {
+      color: var(--color-primary);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .search-result-category {
+      font-size: 0.8rem;
+      color: #666;
+      background: #f1f1f1;
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .no-results {
+      padding: 20px;
+      text-align: center;
+      color: #666;
+    }
+
+    .search-result-item .btn-sm {
+      padding: 3px 10px;
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .search-box {
+        width: 100%;
+        margin: 10px 0;
+      }
+      
+      .search-results {
+        position: fixed;
+        top: 60px;
+        left: 15px;
+        right: 15px;
+        max-height: 300px;
+      }
+      
+      .combos-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .combo-content-section {
+        padding: 20px;
+      }
+    }
+
+    /* Animaciones para notificaciones */
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
   </style>
 </head>
 
 <body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fas fa-wine-bottle"></i> TAMBOS
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
 
-    <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <i class="fas fa-wine-bottle"></i> TAMBOS
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+        <!-- Dropdown Categorías -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Categorías
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
+            <li><a class="dropdown-item" href="ron.html">Ron</a></li>
+            <li><a class="dropdown-item" href="pisco.html">Pisco</a></li>
+            <li><a class="dropdown-item" href="whisky.html">Whisky</a></li>
+          </ul>
+        </li>
 
-          <!-- Dropdown Categorías -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Categorías
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
-              <li><a class="dropdown-item" href="ron.html">Ron</a></li>
-              <li><a class="dropdown-item" href="pisco.html">Pisco</a></li>
-              <li><a class="dropdown-item" href="whisky.html">Whisky</a></li>
-            </ul>
-          </li>
+        <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
+        <li class="nav-item"><a class="nav-link" href="combos.html">Combos</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
 
-          <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
-          <li class="nav-item"><a class="nav-link" href="combos.html">Combos</a></li>
-          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        <!-- BARRA DE BÚSQUEDA -->
+        <li class="nav-item">
+          <div class="search-box d-none d-lg-block">
+            <input type="text" class="form-control" id="searchInput" 
+                   placeholder="Buscar productos..." 
+                   onkeypress="if(event.key === 'Enter') buscarProductos()">
+            <button onclick="buscarProductos()"><i class="fas fa-search"></i></button>
+            
+            <!-- Resultados de búsqueda -->
+            <div class="search-results" id="searchResults"></div>
+          </div>
+        </li>
 
-          <li class="nav-item">
-            <div class="search-box d-none d-lg-block">
-              <input type="text" class="form-control" placeholder="Buscar productos...">
-              <button><i class="fas fa-search"></i></button>
+        <!-- ÍCONO DE USUARIO -->
+        <li class="nav-item dropdown ms-3">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+             data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user" id="userIcon"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <div id="userNotLogged">
+              <li><h6 class="dropdown-header">Mi Cuenta</h6></li>
+              <li><a class="dropdown-item" href="login.html">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+              </a></li>
+              <li><a class="dropdown-item" href="registro.html">
+                <i class="fas fa-user-plus"></i> Registrarse
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="contacto.html">
+                <i class="fas fa-question-circle"></i> Ayuda
+              </a></li>
             </div>
-          </li>
-
-          <li class="nav-item ms-3">
-            <div class="cart-icon">
-              <a class="nav-link" href="carrito.html">🛒 <span id="contadorCarrito" class="badge bg-danger"></span></a>
+            
+            <div id="userLogged" style="display: none;">
+              <li><h6 class="dropdown-header" id="userNameDisplay">Usuario</h6></li>
+              <li><a class="dropdown-item" href="mi-cuenta.html">
+                <i class="fas fa-user-circle"></i> Mi Perfil
+              </a></li>
+              <li><a class="dropdown-item" href="#">
+                <i class="fas fa-shopping-bag"></i> Mis Pedidos
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="javascript:void(0)" onclick="cerrarSesion()">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </a></li>
             </div>
-          </li>
-        </ul>
-      </div>
+          </ul>
+        </li>
+
+       
+      <!-- ÍCONO DEL CARRITO -->
+      <li class="nav-item ms-3">
+  <div class="cart-icon">
+    <a class="nav-link position-relative" href="carrito.html">
+      <i class="fas fa-shopping-cart fs-5"></i>
+      <span id="contadorCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+    </a>
+  </div>
+</li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- Hero Banner -->
   <div class="combos-hero">
@@ -241,7 +558,522 @@
     <div id="listaCombos"></div>
   </div>
 
-  <footer>
+
+  <script>
+    // ============================================
+    // DATOS DE COMBOS
+    // ============================================
+    const combos = [
+      {
+        id: 1,
+        nombre: "Combo Fiesta Navideña",
+        descripcion: "El pack perfecto para celebrar la Navidad con estilo. Incluye una selección de licores premium para brindar toda la noche.",
+        img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585888803_122100855033128561_9078366777214512643_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=QGsz8Uvhs1wQ7kNvwFhBJhl&_nc_oc=Adk4b9v3Vk1XxOXoMavBdyLWhcWV1Kp8TaH5h9Z85PEMpSxh8huWxza5J1COXiInkKI&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=EG-Wg_EBjLCb31PfkyMx1w&oh=00_AfhNLDUDxMvQRPeJC5S7XMWzox0xvPpYPUBaCj5J1P83Rw&oe=6924F994",
+        productos: [
+          { id: 1001, nombre: "Whisky Johnnie Walker Red Label 750ml", descripcion: "Whisky escocés mezclado de alta calidad", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584957097_122099032269128561_85732322634680736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=wupebugPAyAQ7kNvwFV1Rze&_nc_oc=AdmHFm-9EJfLMPCT3UGqHTQDmeOp7RqsG5H3cWVC4HrMVCqUDU7S3QNeHJku1NiFM7w&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=C_wkmT9RuNBeLG4Cw9yTTw&oh=00_Afg2BVp1UYIIKIU6AK43QoYqICfE5jd0nkNJxWk2dXRezg&oe=69226109", precio: 65 },
+          { id: 1002, nombre: "Ron Bacardi Blanco 750ml", descripcion: "Ron blanco suave ideal para cócteles", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584981364_122099032251128561_6526797698771195317_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Bm6ikwoDhA4Q7kNvwFd9DVm&_nc_oc=AdnBgJSWV5bK0cnK4_OLgR27qLP4zRc3qzgHRHg78zDGNLVCObguM7SakOFvE5ViH4M&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=QBRNEYXEDGkcv9TltPbyuw&oh=00_AfhSuYUfnd82DDV6M9uM9pgtIe3IMv4dfguNMmQM3beVmw&oe=69226620", precio: 45 },
+          { id: 1003, nombre: "Champagne Chandon Brut 750ml", descripcion: "Espumante argentino de calidad premium", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585300879_122100854979128561_1904935902203770653_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=DUjY_IuXaiEQ7kNvwF0UPfU&_nc_oc=AdldZMWWLW7Nt8nT-Iw_mia9A7vraiENBhsUywumF1gCcDnk9NZ4aCaGAHmRLSlCPLo&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=In-Ox7QGVej98hoHY8QzPA&oh=00_AfgQovz6p_6z-Cd3IGtj_bWlEk3UiZNjKnJn0xyc64ryJQ&oe=6925292C", precio: 55 },
+          { id: 1004, nombre: "Pisco Portón 500ml", descripcion: "Pisco mosto verde acholado premium", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585189315_122099032341128561_1103789928155127906_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zGOLzaeEH7MQ7kNvwFP2w-w&_nc_oc=Adl4Wu0w7iUByZcJP407BBG0TSeqY291KvzCwS4GIO2gnHUsDyKH1dnccDvVXR_x9fQ&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=F_e1MY0yMG9m7xDp5cTVOQ&oh=00_AfgLW_jKqqOI8g3eGiGyzcSM4HzRxbA5-MZ7oL6eeWbwcg&oe=69225F7F", precio: 70 }
+        ],
+        descuento: 23,
+        campana: "navidad"
+      },
+      {
+        id: 2,
+        nombre: "Combo Libre Clásico",
+        descripcion: "El combo perfecto para tus reuniones informales. Licores versátiles que se adaptan a cualquier ocasión.",
+        img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/586050840_122099029551128561_3159309456453891590_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=S5LholTpAIgQ7kNvwEFwe-o&_nc_oc=AdkEOemOSWqSFaW18JCkM6AFVOET0iOUxuqrrbnm9a5-zXv0hzL-rYTjwygts0yVQFU&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=4ArcF9VRTWABt2cE7SEr_Q&oh=00_AfiZQZOiJ9foQih4msIFzZ6oGSmotXoxZB4YQyzw2yQetg&oe=69227BB8",
+        productos: [
+          { 
+            id: 1005, 
+            nombre: "Combo 1 - Ron Cartavio", 
+            descripcion: "Ron cartavio gaseosa + CocaCola + Hielo", 
+            img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/583914716_122099029353128561_5094165294509875847_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=8fuk-6ybq2wQ7kNvwHmySdi&_nc_oc=AdkVMaGILOXBRWepaP3XGj3AnnBs90UE2VUBWxwRBAEqBvNQOTysCQfwHmAj2dQILLo&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=zrvnVSnIIC434Er_yRsFiQ&oh=00_AfjzDq0SLGDppkUTB2iNVk19O15xEpm3OZ75Xvl7rOVimg&oe=692279EA", 
+            precio: 42 
+          },
+          { 
+            id: 1006,
+            nombre: "Pisco Acholado Tabernero 750ml", 
+            descripcion: "Pisco acholado de uvas aromáticas", 
+            img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/586033137_122099029431128561_5938471491336566120_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=5oTMq1h-5pEQ7kNvwFapkBS&_nc_oc=AdnYiuS12Jlmin37TPCqlToaux8M6qoOVT1E8_FD0z7QL6akH-kE_Ve-UxiXr148a84&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=x5mn2aP-xT-UrdyBeQh4mw&oh=00_AfhIEInP5v_HhZ7fJnL8soolQLh0Yrio2Bnk6vhiRrBZlQ&oe=692279D9", 
+            precio: 48 
+          },
+          { 
+            id: 1007,
+            nombre: "Vodka Absolut 750ml", 
+            descripcion: "Vodka sueco de alta pureza", 
+            img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585886852_122099029473128561_1022212717432697550_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=y_-IvAehGnYQ7kNvwF5kigZ&_nc_oc=AdliOjw_4lWHXw8bJ7C62aPNGbMUZMJ_qdXXJGhsV6p8YZU5dkkxXBRrxiCVU3i4vFQ&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=JTSQP0AlGytcXG-nPugN7w&oh=00_AfjjTGulNdVdPOFnXWxl2kJlphFeytKOPiSgk6VPGvp4JA&oe=69225F56", 
+            precio: 55 
+          },
+          { 
+            id: 1008,
+            nombre: "Vodka Absolut 750ml", 
+            descripcion: "Vodka sueco de alta pureza", 
+            img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/582704304_122099029503128561_8001024723707717550_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=3sCBcTbRb6EQ7kNvwG7n6Xk&_nc_oc=Adm8V4O8H91HD9OwuM2b5xsZ0g81EWlYNGdNcYsyb-pdFDB0JsDZ2KyfCbKxo40ASa0&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=Deot7DzXDuB6MeTPLprdXg&oh=00_AfhblfMIX5D6rKXvKLd6mrSj5Dg8hqS7g2O8X2p_xMLgSw&oe=69226582", 
+            precio: 55 
+          }
+        ],
+        descuento: 18,
+        campana: "libres"
+      },
+      {
+        id: 3,
+        nombre: "Combo Carnaval Fiestero",
+        descripcion: "¡A celebrar se ha dicho! Pack especial para disfrutar los carnavales con toda la energía y sabor.",
+        img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587062594_122100989595128561_1436267499475229197_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=CwvKR2AnbOQQ7kNvwHdeRDm&_nc_oc=AdmZvo7jyrzUEg-ZsA01OSUOFb1yuOP6f29O2rFHHIFxqKCEp4643qHatP3QCu6Si2w&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=MKXxsf9wo8bEcYo5dwDoaw&oh=00_AfjWl9xO6vNrRDyO8OE4i8h2hcUKQwr8gCNc362-lmMTIA&oe=69251DF5",
+        productos: [
+          { id: 1009, nombre: "Ron Bacardi Limón 750ml", descripcion: "Ron con sabor a limón natural", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584620958_122099023137128561_3098565941146800057_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=U71xIlLC9QIQ7kNvwE4jT_T&_nc_oc=Adk5EeZkvlEGI_J8ak6sL4R6Niy50DK3B6it2lTaRWjDa2I45J3MlXMZXriVVBvWS-8&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=pxHWmu0ck2JuB7apvIesZA&oh=00_AfizYT4bnZH_3gMmguAt9-V9ahUXQdXUhG4KEQLLEDjmoA&oe=69224DEC", precio: 50 },
+          { id: 1010, nombre: "Cerveza Artesanal Pack x6", descripcion: "Cervezas artesanales variadas", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585298497_122099023461128561_2986622148017472354_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=J06CU5RH03wQ7kNvwE_tLPo&_nc_oc=AdnnVKB_dkhuxgjNG8e6492PNVhOeD2rlpd6ssd3xLRrHYnpaW7J0mnHzVw8QJhaYY0&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=9GXXovc6R6iXVVzBOvNB9A&oh=00_Afh4Viy4eftpxlokVurDSIDz-Gqvxjb7txfFlf1oKq5OyA&oe=69227814", precio: 35 },
+          { id: 1011, nombre: "Tequila José Cuervo 750ml", descripcion: "Tequila mexicano auténtico", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584485203_122099023455128561_7401935454916008113_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=cFUYnO_n54wQ7kNvwG3R_HW&_nc_oc=AdlmCUQPS1cZYg6mf6_1EsYXfqebiozgggYdcLV4oguqU005G1rRurxNVe0d1jgeWXo&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=1Hht4X0aWTSn4bR0hYoYFw&oh=00_AfgP2RKpaXJb5_RB5Agc1xSLmQ_tCH8_WoJq6HrjSOmd8A&oe=69226530", precio: 60 },
+          { id: 1012, nombre: "Sangría Lolea 750ml", descripcion: "Sangría española premium", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584896278_122099023125128561_6149123509768270059_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=p0UZm23aI1YQ7kNvwFSzQuH&_nc_oc=AdkeiSOimZTCH7122zsK05wqICokV0W2fLegGVg0WZeO77O2jBoFPANTl_GtJH8Hqnc&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=ejrxcetZ0CoxwW_THFZnFQ&oh=00_AfgUVufPao47v5CukcKTIeI5Gt6TgIJ4cy8Ek7wW_3N3sw&oe=6922772D", precio: 38 }
+        ],
+        descuento: 20,
+        campana: "carnavales"
+      },
+      {
+        id: 4,
+        nombre: "Gaseosas",
+        descripcion: "Celebra momentos con los diversos acompañantes o extras que se ofrece solo aqui en tambos.",
+        img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587269976_122100983619128561_5794214980910654575_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=hoOkz2VfmHYQ7kNvwGTlowV&_nc_oc=AdnHrelbT7BmcviAxmJMHYZcB-XdRkurQpLDfQOVpnbcOaatGt2cXfXuzmznUE0KN5k&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=fmsWkZLUnLuht9kAMX1Ktg&oh=00_AfhTHOmm-ebJvyBhXi9hGSoIWJdv7kHaTTHB0nJva6ZaQw&oe=69252CA2",
+        productos: [
+          { id: 1013, nombre: "Whisky Johnnie Walker Black Label 750ml", descripcion: "Whisky escocés de 12 años", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587314930_122100977775128561_1864572860022213136_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=YPJYW89ut5wQ7kNvwHqLbmL&_nc_oc=AdlxLn3019j64mTZdfHKAupEHNgqAOhW1k5tpb-GW_fRrkMMZA_IM-BqiQmT18W_QlI&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=u7vLHOX8GZv9L15wRwrEoQ&oh=00_Afi--HZNQrp-t0J_d2z30nd4W2LqpeAczXtm9EJibmKF2A&oe=6924F648", precio: 120 },
+          { id: 1014, nombre: "Champagne Moët & Chandon 750ml", descripcion: "Champagne francés de lujo", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/586921567_122100977649128561_1126416489318781772_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=odAy2GQkm88Q7kNvwGiRLN4&_nc_oc=AdkDbWaRXNL24ha6m9JPiZFy9oE4A_usIwKOfbDjiajt40r1ecbEEeckgO6mk51evZ8&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=MACKm22ZmmTEXR6XBpuUQQ&oh=00_Afi-_cFDLjKWfRsrcJEo0M7aBF3iveSmuVw2ppUAIIwppg&oe=69251B0F", precio: 180 },
+          { id: 1015, nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587688993_122100977631128561_4900888438360165364_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=AxxcvRkh6IEQ7kNvwEKsPLU&_nc_oc=AdmWzHwHM2SfqgsY2UmVUkRlkTW7bB8w2Ci8c7w6Dh6TRFFXW5JjzmWyzROapA8FAxM&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=rP6G4FuxEuXtIMVPjyYIPA&oh=00_AfimTU91oleUzXU6eVTlAje-eqyEYLyHSA9wuksgHFjOIQ&oe=6924F78D", precio: 65 },
+          { id: 1016, nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585376708_122100977943128561_5089920810234179543_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=JCKAl9bC3NUQ7kNvwHW8oRN&_nc_oc=AdnKiZZkER6q8KI4N1TJVee3n8pDn7O5k4oWO_JgrahmVwonQKr9wSBmYHXYjrDPhvU&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=WQLux0o_C4Rx7k7MjPInfg&oh=00_AfilBtANT6Vcew5A--vCPlMXl3gTdbY5vtBAKbZu_ockNg&oe=69250EC8", precio: 65 }
+        ],
+        descuento: 15,
+        campana: "otros"
+      }
+    ];
+
+    // ============================================
+    // FUNCIONES PARA LA PÁGINA DE COMBOS
+    // ============================================
+    function mostrarCombos(filtro = 'todos') {
+      const listaCombos = document.getElementById("listaCombos");
+      listaCombos.innerHTML = "";
+
+      const combosFiltrados = filtro === 'todos' 
+        ? combos 
+        : combos.filter(c => c.campana === filtro);
+
+      if (combosFiltrados.length === 0) {
+        listaCombos.innerHTML = `<p class="text-center text-muted">No hay combos disponibles para esta categoría 😔</p>`;
+        return;
+      }
+
+      combosFiltrados.forEach(combo => {
+        const productosHTML = combo.productos.map(p => `
+          <div class="col-6 col-md-3">
+            <div class="producto-mini-card">
+              <img src="${p.img}" alt="${p.nombre}">
+              <div class="producto-mini-info">
+                <h6>${p.nombre}</h6>
+                <p>${p.descripcion}</p>
+                <span class="precio-mini">S/ ${p.precio.toFixed(2)}</span>
+                <button class="btn btn-sm agregar-btn" 
+                  data-id="${p.id}" 
+                  data-nombre="${p.nombre}" 
+                  data-precio="${p.precio}" 
+                  data-img="${p.img}">
+                  <i class="fas fa-cart-plus"></i> Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+
+        const comboHTML = `
+          <div class="combo-card">
+            <div class="combo-card-inner">
+              <div class="combo-image-section">
+                <img src="${combo.img}" alt="${combo.nombre}">
+                <span class="combo-badge">-${combo.descuento}%</span>
+                <span class="campaign-tag tag-${combo.campana}">${combo.campana.toUpperCase()}</span>
+              </div>
+              <div class="combo-content-section">
+                <h3>${combo.nombre}</h3>
+                <p class="combo-description">${combo.descripcion}</p>
+                <div class="row g-3">${productosHTML}</div>
+              </div>
+            </div>
+          </div>
+        `;
+        listaCombos.insertAdjacentHTML("beforeend", comboHTML);
+      });
+
+      // Vincular eventos a los botones
+      document.querySelectorAll(".agregar-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+          const producto = {
+            id: parseInt(this.dataset.id),
+            nombre: this.dataset.nombre,
+            precio: parseFloat(this.dataset.precio),
+            imagen: this.dataset.img,
+            cantidad: 1,
+            ml: '750', // Valor por defecto para combos
+            categoria: 'Combo'
+          };
+          
+          agregarAlCarrito(producto);
+          
+          // Efecto visual en el botón
+          this.innerHTML = '<i class="fas fa-check"></i> Agregado';
+          this.style.background = '#28a745';
+          
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar';
+            this.style.background = '';
+          }, 2000);
+        });
+      });
+    }
+
+    // ============================================
+    // FUNCIONES DEL CARRITO (UNIFICADAS)
+    // ============================================
+    function agregarAlCarrito(producto) {
+      // Usar el mismo carrito que las otras páginas
+      let carrito = JSON.parse(localStorage.getItem("carrito_tambos")) || [];
+      
+      // Verificar si el producto ya está en el carrito
+      const productoExistente = carrito.find(item => item.id === producto.id);
+      
+      if (productoExistente) {
+        productoExistente.cantidad = (productoExistente.cantidad || 1) + 1;
+      } else {
+        carrito.push(producto);
+      }
+      
+      localStorage.setItem("carrito_tambos", JSON.stringify(carrito));
+      
+      // Actualizar contador
+      actualizarContadorCarrito();
+      
+      // Mostrar notificación
+      mostrarNotificacion(`${producto.nombre} agregado al carrito`);
+    }
+
+    function actualizarContadorCarrito() {
+      const contador = document.getElementById('contadorCarrito');
+      if (contador) {
+        const carrito = JSON.parse(localStorage.getItem("carrito_tambos")) || [];
+        const totalItems = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
+        contador.textContent = totalItems;
+        contador.style.display = totalItems > 0 ? 'inline' : 'none';
+      }
+    }
+
+    function mostrarNotificacion(mensaje) {
+      const notificacion = document.createElement('div');
+      notificacion.className = 'alert alert-success position-fixed';
+      notificacion.style.cssText = `
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease;
+      `;
+      notificacion.innerHTML = `
+        <div class="d-flex align-items-center">
+          <i class="fas fa-check-circle me-2"></i>
+          <span>${mensaje}</span>
+        </div>
+      `;
+      
+      document.body.appendChild(notificacion);
+      
+      setTimeout(() => {
+        notificacion.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notificacion.remove(), 300);
+      }, 3000);
+    }
+
+    // ============================================
+    // FUNCIONES DE BÚSQUEDA
+    // ============================================
+    const productosTambos = [
+      // Incluir algunos productos de los combos en la búsqueda
+      ...combos.flatMap(combo => combo.productos.map(p => ({
+        ...p,
+        categoria: 'Combo'
+      }))),
+      {
+        id: 201,
+        nombre: "Ron Cartavio X.O",
+        categoria: "Ron",
+        precio: 85.00,
+        imagen: "https://almendariz.com.pe/wp-content/uploads/2022/08/011040005-1.jpg",
+        descripcion: "Ron premium añejo"
+      },
+      {
+        id: 202,
+        nombre: "Pisco Quebranta",
+        categoria: "Pisco",
+        precio: 45.00,
+        imagen: "https://almendariz.com.pe/wp-content/uploads/2021/12/010060005-1.jpg",
+        descripcion: "Pisco puro quebranta"
+      },
+      {
+        id: 203,
+        nombre: "Whisky Johnnie Walker",
+        categoria: "Whisky",
+        precio: 120.00,
+        imagen: "https://almendariz.com.pe/wp-content/uploads/2021/12/015018001-2.jpg",
+        descripcion: "Whisky escocés"
+      }
+    ];
+
+    function buscarProductos() {
+      const searchInput = document.getElementById('searchInput');
+      const searchResults = document.getElementById('searchResults');
+      const query = searchInput.value.trim().toLowerCase();
+      
+      if (!query) {
+        searchResults.style.display = 'none';
+        return;
+      }
+      
+      const resultados = productosTambos.filter(producto => 
+        producto.nombre.toLowerCase().includes(query) ||
+        producto.categoria.toLowerCase().includes(query) ||
+        (producto.descripcion && producto.descripcion.toLowerCase().includes(query))
+      );
+      
+      if (resultados.length > 0) {
+        let html = '';
+        resultados.forEach(producto => {
+          html += `
+            <div class="search-result-item" onclick="seleccionarProducto(${producto.id})">
+              <img src="${producto.imagen || producto.img}" alt="${producto.nombre}" class="search-result-img">
+              <div class="search-result-info">
+                <div class="search-result-name">${producto.nombre}</div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="search-result-price">S/ ${(producto.precio || producto.precioBase || 0).toFixed(2)}</span>
+                  <span class="search-result-category">${producto.categoria}</span>
+                </div>
+              </div>
+              <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); agregarAlCarritoBusqueda(${producto.id})">
+                <i class="fas fa-cart-plus"></i>
+              </button>
+            </div>
+          `;
+        });
+        searchResults.innerHTML = html;
+        searchResults.style.display = 'block';
+      } else {
+        searchResults.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search fa-2x mb-3 text-muted"></i>
+            <p>No se encontraron productos</p>
+            <p class="small">Intenta con otra palabra clave</p>
+          </div>
+        `;
+        searchResults.style.display = 'block';
+      }
+    }
+
+    function agregarAlCarritoBusqueda(id) {
+      const producto = productosTambos.find(p => p.id === id);
+      if (producto) {
+        agregarAlCarrito({
+          ...producto,
+          cantidad: 1,
+          ml: '750'
+        });
+        
+        mostrarNotificacion(`✅ ${producto.nombre} agregado al carrito`);
+        
+        // Limpiar búsqueda
+        document.getElementById('searchInput').value = '';
+        document.getElementById('searchResults').style.display = 'none';
+      }
+    }
+
+    function seleccionarProducto(id) {
+      const producto = productosTambos.find(p => p.id === id);
+      if (producto) {
+        // Redirigir a la página correcta según la categoría
+        const paginas = {
+          'Ron': 'ron.html',
+          'Whisky': 'whisky.html',
+          'Pisco': 'pisco.html',
+          'Combo': 'combos.html'
+        };
+        
+        const pagina = paginas[producto.categoria] || 'index.html';
+        window.location.href = pagina;
+        
+        // Limpiar búsqueda
+        document.getElementById('searchInput').value = '';
+        document.getElementById('searchResults').style.display = 'none';
+      }
+    }
+
+    // ============================================
+    // FUNCIONES DE USUARIO
+    // ============================================
+    function estaLogueado() {
+      return localStorage.getItem('usuario_tambos') !== null;
+    }
+
+    function obtenerUsuario() {
+      const usuario = localStorage.getItem('usuario_tambos');
+      return usuario ? JSON.parse(usuario) : null;
+    }
+
+    function cerrarSesion() {
+      if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+        localStorage.removeItem('usuario_tambos');
+        actualizarEstadoUsuario();
+        window.location.href = 'index.html';
+      }
+    }
+
+    function actualizarEstadoUsuario() {
+      const usuario = obtenerUsuario();
+      const userNotLogged = document.getElementById('userNotLogged');
+      const userLogged = document.getElementById('userLogged');
+      const userNameDisplay = document.getElementById('userNameDisplay');
+      const userIcon = document.getElementById('userIcon');
+      
+      if (usuario) {
+        if (userNotLogged) userNotLogged.style.display = 'none';
+        if (userLogged) userLogged.style.display = 'block';
+        if (userNameDisplay) userNameDisplay.textContent = usuario.nombre ? usuario.nombre.split(' ')[0] : 'Usuario';
+        if (userIcon) {
+          userIcon.className = 'fas fa-user-check';
+          userIcon.style.color = '#4CAF50';
+        }
+      } else {
+        if (userNotLogged) userNotLogged.style.display = 'block';
+        if (userLogged) userLogged.style.display = 'none';
+        if (userIcon) {
+          userIcon.className = 'fas fa-user';
+          userIcon.style.color = '';
+        }
+      }
+    }
+
+    // ============================================
+    // INICIALIZACIÓN
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mostrar combos
+      mostrarCombos();
+      
+      // Actualizar contador del carrito
+      actualizarContadorCarrito();
+      
+      // Actualizar estado del usuario
+      actualizarEstadoUsuario();
+      
+      // Configurar filtros
+      const botones = document.querySelectorAll(".filter-btn");
+      botones.forEach(btn => {
+        btn.addEventListener('click', function() {
+          botones.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Configurar búsqueda en tiempo real
+      const searchInput = document.getElementById('searchInput');
+      let searchTimeout;
+      
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(buscarProductos, 300);
+        });
+        
+        searchInput.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape') {
+            this.value = '';
+            document.getElementById('searchResults').style.display = 'none';
+          }
+        });
+      }
+      
+      // Cerrar resultados al hacer clic fuera
+      document.addEventListener('click', function(event) {
+        const searchBox = document.querySelector('.search-box');
+        const searchResults = document.getElementById('searchResults');
+        
+        if (searchResults && searchBox && !searchBox.contains(event.target)) {
+          searchResults.style.display = 'none';
+        }
+      });
+    });
+
+    // Función para filtrar combos (global)
+    window.filtrarCampana = function (campana) {
+      mostrarCombos(campana);
+    };
+  </script>
+    <script>
+    // ============================================
+    // VERIFICACIÓN DE SESIÓN
+    // ============================================
+    async function actualizarEstadoUsuarioPromocion() {
+        try {
+            const response = await fetch('verificar_sesion.php');
+            const data = await response.json();
+            
+            const userNotLogged = document.getElementById('userNotLogged');
+            const userLogged = document.getElementById('userLogged');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userIcon = document.getElementById('userIcon');
+            
+            if (data.logged_in) {
+                // Usuario logueado
+                if (userNotLogged) userNotLogged.style.display = 'none';
+                if (userLogged) userLogged.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = data.cliente.nombre.split(' ')[0];
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user-check';
+                    userIcon.style.color = '#28a745';
+                }
+            } else {
+                // Usuario no logueado
+                if (userNotLogged) userNotLogged.style.display = 'block';
+                if (userLogged) userLogged.style.display = 'none';
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user';
+                    userIcon.style.color = '';
+                }
+            }
+        } catch (error) {
+            console.error('Error al verificar sesión:', error);
+        }
+    }
+
+    // ============================================
+    // FUNCIÓN DE CERRAR SESIÓN
+    // ============================================
+    function cerrarSesion() {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+            window.location.href = 'logout.php';
+        }
+    }
+
+    // ============================================
+    // LLAMAR A LA VERIFICACIÓN AL CARGAR LA PÁGINA
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Actualizar estado del usuario
+        await actualizarEstadoUsuarioPromocion();
+        
+        // Configurar botón de cerrar sesión
+        const btnCerrarSesion = document.querySelector('[onclick*="cerrarSesion"]');
+        if (btnCerrarSesion) {
+            btnCerrarSesion.onclick = cerrarSesion;
+        }
+    });
+    </script>
+
+      <footer>
     <div class="container">
       <div class="row text-center text-md-start">
 
@@ -256,9 +1088,9 @@
           <ul class="list-unstyled">
             <li><a href="catalogo.html"><i class="fas fa-book-open"></i> Catálogo disponible</a></li>
             <li><a href="https://dashboard.mailerlite.com/preview/1856801/emails/169069249404339219"><i class="fas fa-envelope"></i> Correo masivo</a></li>
-            <li><a href="#"><i class="fas fa-chalkboard"></i> Presentación</a></li>
+            <li><a href="blog.html"><i class="fas fa-chalkboard"></i> Presentación</a></li>
             <li><a href="privacidad.html" target="_blank"><i class="fas fa-shield-alt"></i> Política de Privacidad </a></li>
-           <li> <a href="terminos.html"target="_blank"><i class="fas fa-book"></i> Términos y Condiciones</a></li>  
+           <li> <a href="terminos.html" target="_blank"><i class="fas fa-book"></i> Términos y Condiciones</a></li>  
           </ul>
         </div>
 
@@ -294,241 +1126,7 @@
       <p>Tomar Bebidas Alcoholicas en Exceso es Dañino</p>
     </div>
   </footer>
-
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const combos = [
-    {
-      id: 1,
-      nombre: "Combo Fiesta Navideña",
-      descripcion: "El pack perfecto para celebrar la Navidad con estilo. Incluye una selección de licores premium para brindar toda la noche.",
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585888803_122100855033128561_9078366777214512643_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=QGsz8Uvhs1wQ7kNvwFhBJhl&_nc_oc=Adk4b9v3Vk1XxOXoMavBdyLWhcWV1Kp8TaH5h9Z85PEMpSxh8huWxza5J1COXiInkKI&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=EG-Wg_EBjLCb31PfkyMx1w&oh=00_AfhNLDUDxMvQRPeJC5S7XMWzox0xvPpYPUBaCj5J1P83Rw&oe=6924F994",
-      productos: [
-        { nombre: "Whisky Johnnie Walker Red Label 750ml", descripcion: "Whisky escocés mezclado de alta calidad", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584957097_122099032269128561_85732322634680736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=wupebugPAyAQ7kNvwFV1Rze&_nc_oc=AdmHFm-9EJfLMPCT3UGqHTQDmeOp7RqsG5H3cWVC4HrMVCqUDU7S3QNeHJku1NiFM7w&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=C_wkmT9RuNBeLG4Cw9yTTw&oh=00_Afg2BVp1UYIIKIU6AK43QoYqICfE5jd0nkNJxWk2dXRezg&oe=69226109", precio: 65 },
-        { nombre: "Ron Bacardi Blanco 750ml", descripcion: "Ron blanco suave ideal para cócteles", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584981364_122099032251128561_6526797698771195317_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Bm6ikwoDhA4Q7kNvwFd9DVm&_nc_oc=AdnBgJSWV5bK0cnK4_OLgR27qLP4zRc3qzgHRHg78zDGNLVCObguM7SakOFvE5ViH4M&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=QBRNEYXEDGkcv9TltPbyuw&oh=00_AfhSuYUfnd82DDV6M9uM9pgtIe3IMv4dfguNMmQM3beVmw&oe=69226620", precio: 45 },
-        { nombre: "Champagne Chandon Brut 750ml", descripcion: "Espumante argentino de calidad premium", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585300879_122100854979128561_1904935902203770653_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=DUjY_IuXaiEQ7kNvwF0UPfU&_nc_oc=AdldZMWWLW7Nt8nT-Iw_mia9A7vraiENBhsUywumF1gCcDnk9NZ4aCaGAHmRLSlCPLo&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=In-Ox7QGVej98hoHY8QzPA&oh=00_AfgQovz6p_6z-Cd3IGtj_bWlEk3UiZNjKnJn0xyc64ryJQ&oe=6925292C", precio: 55 },
-        { nombre: "Pisco Portón 500ml", descripcion: "Pisco mosto verde acholado premium", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585189315_122099032341128561_1103789928155127906_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zGOLzaeEH7MQ7kNvwFP2w-w&_nc_oc=Adl4Wu0w7iUByZcJP407BBG0TSeqY291KvzCwS4GIO2gnHUsDyKH1dnccDvVXR_x9fQ&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=F_e1MY0yMG9m7xDp5cTVOQ&oh=00_AfgLW_jKqqOI8g3eGiGyzcSM4HzRxbA5-MZ7oL6eeWbwcg&oe=69225F7F", precio: 70 }
-      ],
-      descuento: 23,
-      campana: "navidad"
-    },
-    {
-      id: 2,
-      nombre: "Combo Libre Clásico",
-      descripcion: "El combo perfecto para tus reuniones informales. Licores versátiles que se adaptan a cualquier ocasión.",
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/586050840_122099029551128561_3159309456453891590_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=S5LholTpAIgQ7kNvwEFwe-o&_nc_oc=AdkEOemOSWqSFaW18JCkM6AFVOET0iOUxuqrrbnm9a5-zXv0hzL-rYTjwygts0yVQFU&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=4ArcF9VRTWABt2cE7SEr_Q&oh=00_AfiZQZOiJ9foQih4msIFzZ6oGSmotXoxZB4YQyzw2yQetg&oe=69227BB8",
-      productos: [
-        { 
-      nombre: "Combo 1 - Ron Cartavio", 
-      descripcion: "Ron cartavio gaseosa + CocaCola + Hielo", 
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/583914716_122099029353128561_5094165294509875847_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=8fuk-6ybq2wQ7kNvwHmySdi&_nc_oc=AdkVMaGILOXBRWepaP3XGj3AnnBs90UE2VUBWxwRBAEqBvNQOTysCQfwHmAj2dQILLo&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=zrvnVSnIIC434Er_yRsFiQ&oh=00_AfjzDq0SLGDppkUTB2iNVk19O15xEpm3OZ75Xvl7rOVimg&oe=692279EA", 
-      precio: 42 
-    },
-    { 
-      nombre: "Pisco Acholado Tabernero 750ml", 
-      descripcion: "Pisco acholado de uvas aromáticas", 
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/586033137_122099029431128561_5938471491336566120_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=5oTMq1h-5pEQ7kNvwFapkBS&_nc_oc=AdnYiuS12Jlmin37TPCqlToaux8M6qoOVT1E8_FD0z7QL6akH-kE_Ve-UxiXr148a84&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=x5mn2aP-xT-UrdyBeQh4mw&oh=00_AfhIEInP5v_HhZ7fJnL8soolQLh0Yrio2Bnk6vhiRrBZlQ&oe=692279D9", 
-      precio: 48 
-    },
-    { 
-      nombre: "Vodka Absolut 750ml", 
-      descripcion: "Vodka sueco de alta pureza", 
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585886852_122099029473128561_1022212717432697550_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=y_-IvAehGnYQ7kNvwF5kigZ&_nc_oc=AdliOjw_4lWHXw8bJ7C62aPNGbMUZMJ_qdXXJGhsV6p8YZU5dkkxXBRrxiCVU3i4vFQ&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=JTSQP0AlGytcXG-nPugN7w&oh=00_AfjjTGulNdVdPOFnXWxl2kJlphFeytKOPiSgk6VPGvp4JA&oe=69225F56", 
-      precio: 55 
-    },
-     { 
-      nombre: "Vodka Absolut 750ml", 
-      descripcion: "Vodka sueco de alta pureza", 
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/582704304_122099029503128561_8001024723707717550_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=3sCBcTbRb6EQ7kNvwG7n6Xk&_nc_oc=Adm8V4O8H91HD9OwuM2b5xsZ0g81EWlYNGdNcYsyb-pdFDB0JsDZ2KyfCbKxo40ASa0&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=Deot7DzXDuB6MeTPLprdXg&oh=00_AfhblfMIX5D6rKXvKLd6mrSj5Dg8hqS7g2O8X2p_xMLgSw&oe=69226582", 
-      precio: 55 
-    }
-      ],
-      descuento: 18,
-      campana: "libres"
-    },
-    {
-      id: 3,
-      nombre: "Combo Carnaval Fiestero",
-      descripcion: "¡A celebrar se ha dicho! Pack especial para disfrutar los carnavales con toda la energía y sabor.",
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587062594_122100989595128561_1436267499475229197_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=CwvKR2AnbOQQ7kNvwHdeRDm&_nc_oc=AdmZvo7jyrzUEg-ZsA01OSUOFb1yuOP6f29O2rFHHIFxqKCEp4643qHatP3QCu6Si2w&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=MKXxsf9wo8bEcYo5dwDoaw&oh=00_AfjWl9xO6vNrRDyO8OE4i8h2hcUKQwr8gCNc362-lmMTIA&oe=69251DF5",
-      productos: [
-        { nombre: "Ron Bacardi Limón 750ml", descripcion: "Ron con sabor a limón natural", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584620958_122099023137128561_3098565941146800057_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=U71xIlLC9QIQ7kNvwE4jT_T&_nc_oc=Adk5EeZkvlEGI_J8ak6sL4R6Niy50DK3B6it2lTaRWjDa2I45J3MlXMZXriVVBvWS-8&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=pxHWmu0ck2JuB7apvIesZA&oh=00_AfizYT4bnZH_3gMmguAt9-V9ahUXQdXUhG4KEQLLEDjmoA&oe=69224DEC", precio: 50 },
-        { nombre: "Cerveza Artesanal Pack x6", descripcion: "Cervezas artesanales variadas", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585298497_122099023461128561_2986622148017472354_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=J06CU5RH03wQ7kNvwE_tLPo&_nc_oc=AdnnVKB_dkhuxgjNG8e6492PNVhOeD2rlpd6ssd3xLRrHYnpaW7J0mnHzVw8QJhaYY0&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=9GXXovc6R6iXVVzBOvNB9A&oh=00_Afh4Viy4eftpxlokVurDSIDz-Gqvxjb7txfFlf1oKq5OyA&oe=69227814", precio: 35 },
-        { nombre: "Tequila José Cuervo 750ml", descripcion: "Tequila mexicano auténtico", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584485203_122099023455128561_7401935454916008113_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=cFUYnO_n54wQ7kNvwG3R_HW&_nc_oc=AdlmCUQPS1cZYg6mf6_1EsYXfqebiozgggYdcLV4oguqU005G1rRurxNVe0d1jgeWXo&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=1Hht4X0aWTSn4bR0hYoYFw&oh=00_AfgP2RKpaXJb5_RB5Agc1xSLmQ_tCH8_WoJq6HrjSOmd8A&oe=69226530", precio: 60 },
-        { nombre: "Sangría Lolea 750ml", descripcion: "Sangría española premium", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/584896278_122099023125128561_6149123509768270059_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=p0UZm23aI1YQ7kNvwFSzQuH&_nc_oc=AdkeiSOimZTCH7122zsK05wqICokV0W2fLegGVg0WZeO77O2jBoFPANTl_GtJH8Hqnc&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=ejrxcetZ0CoxwW_THFZnFQ&oh=00_AfgUVufPao47v5CukcKTIeI5Gt6TgIJ4cy8Ek7wW_3N3sw&oe=6922772D", precio: 38 }
-      ],
-      descuento: 20,
-      campana: "carnavales"
-    },
-    {
-      id: 4,
-      nombre: "Gaseosas",
-      descripcion: "Celebra momentos con los diversos acompañantes o extras que se ofrece solo aqui en tambos.",
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587269976_122100983619128561_5794214980910654575_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=hoOkz2VfmHYQ7kNvwGTlowV&_nc_oc=AdnHrelbT7BmcviAxmJMHYZcB-XdRkurQpLDfQOVpnbcOaatGt2cXfXuzmznUE0KN5k&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=fmsWkZLUnLuht9kAMX1Ktg&oh=00_AfhTHOmm-ebJvyBhXi9hGSoIWJdv7kHaTTHB0nJva6ZaQw&oe=69252CA2",
-      productos: [
-        { nombre: "Whisky Johnnie Walker Black Label 750ml", descripcion: "Whisky escocés de 12 años", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587314930_122100977775128561_1864572860022213136_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=YPJYW89ut5wQ7kNvwHqLbmL&_nc_oc=AdlxLn3019j64mTZdfHKAupEHNgqAOhW1k5tpb-GW_fRrkMMZA_IM-BqiQmT18W_QlI&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=u7vLHOX8GZv9L15wRwrEoQ&oh=00_Afi--HZNQrp-t0J_d2z30nd4W2LqpeAczXtm9EJibmKF2A&oe=6924F648", precio: 120 },
-        { nombre: "Champagne Moët & Chandon 750ml", descripcion: "Champagne francés de lujo", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/586921567_122100977649128561_1126416489318781772_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=odAy2GQkm88Q7kNvwGiRLN4&_nc_oc=AdkDbWaRXNL24ha6m9JPiZFy9oE4A_usIwKOfbDjiajt40r1ecbEEeckgO6mk51evZ8&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=MACKm22ZmmTEXR6XBpuUQQ&oh=00_Afi-_cFDLjKWfRsrcJEo0M7aBF3iveSmuVw2ppUAIIwppg&oe=69251B0F", precio: 180 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587688993_122100977631128561_4900888438360165364_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=AxxcvRkh6IEQ7kNvwEKsPLU&_nc_oc=AdmWzHwHM2SfqgsY2UmVUkRlkTW7bB8w2Ci8c7w6Dh6TRFFXW5JjzmWyzROapA8FAxM&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=rP6G4FuxEuXtIMVPjyYIPA&oh=00_AfimTU91oleUzXU6eVTlAje-eqyEYLyHSA9wuksgHFjOIQ&oe=6924F78D", precio: 65 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585376708_122100977943128561_5089920810234179543_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=JCKAl9bC3NUQ7kNvwHW8oRN&_nc_oc=AdnKiZZkER6q8KI4N1TJVee3n8pDn7O5k4oWO_JgrahmVwonQKr9wSBmYHXYjrDPhvU&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=WQLux0o_C4Rx7k7MjPInfg&oh=00_AfilBtANT6Vcew5A--vCPlMXl3gTdbY5vtBAKbZu_ockNg&oe=69250EC8", precio: 65 }
-      ],
-      descuento: 15,
-      campana: "otros"
-    },
-    {
-      id: 5,
-      nombre: "Bebidas dulces",
-      descripcion: "Celebra momentos con los diversos acompañantes o extras que se ofrece solo aqui en tambos.",
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585370177_122100983553128561_891457400354922939_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=7iNLItbJo3QQ7kNvwE1Lo_y&_nc_oc=AdmBCBRtPfuW2ZTE4MyFSLcyDaV-MBqqB-Y_GlmuKcI7crlr69fuJrTRDvIDglcRq1c&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=YLrC0DS2FsIA18iSzoVzfg&oh=00_AfgdGGlTPndZjw8iRYdU-QZP0hxXwomoMrxu40nObVVB4Q&oe=692523B5",
-      productos: [
-        { nombre: "Whisky Johnnie Walker Black Label 750ml", descripcion: "Whisky escocés de 12 años", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585348714_122100977763128561_4056515406593822433_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=PLjlURj9BzcQ7kNvwH30omH&_nc_oc=AdlW07Y7_POdTwhmWHOlNqClm3cdALdgfz3zRK4LjWMROVZej0EEcXb_m1EqgBc4EKU&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=Kmd3aaoLCewsTTBfwHe8Kg&oh=00_AfhxMremSSAikF8D8JiQX6qK4v3eRiDB0OQ90AsnoZVTOA&oe=69250194", precio: 120 },
-        { nombre: "Champagne Moët & Chandon 750ml", descripcion: "Champagne francés de lujo", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587283149_122100978099128561_2304147541304678262_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=9VzY9m-qxz8Q7kNvwFUbsBn&_nc_oc=AdkGFn14mUlqoVx5YAB38mNm5jQq-GkRjGP-TQYr4iKBF8mioXKSmdOeBuy6O9d-K8s&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=K5-3Cr-ZWmZArmpB1tSrVQ&oh=00_AfgaY8FBf4aoxuKX-fuUZ-N58BtWcBWgGYn8p5KQLQOp0g&oe=6924F658", precio: 180 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "", precio: 65 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "", precio: 65 }
-      ],
-      descuento: 15,
-      campana: "otros"
-    },
-    {
-      id: 6,
-      nombre: "Snaks",
-      descripcion: "Celebra momentos con los diversos acompañantes o extras que se ofrece solo aqui en tambos.",
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585391052_122100983403128561_4342126362783237447_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=eCE1sU2T6JgQ7kNvwHdwRzi&_nc_oc=AdnoOKL03GgwMJjgo3mUMynpc26RaZLwbE4bX0jMxkD4J3UMfEqWlSD0U0uiYvDA4Rc&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=bb0Y9meSUfAO11Lwkw2kHQ&oh=00_Afhg0QaCmizE_aBSJhOaVtkJAipKVoxBKTBD00YSkTZ2zA&oe=69251A51",
-      productos: [
-        { nombre: "Whisky Johnnie Walker Black Label 750ml", descripcion: "Whisky escocés de 12 años", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587314768_122100977655128561_3829781785660162762_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=YGPRsIOBJWQQ7kNvwHcR0XS&_nc_oc=Adk3KkhYSNJ-Ih5uVDw_3dR-2QJd4IVdQ0J9UL_tjU-jEO8Bl6wZkksTA9Hb0kyYGiY&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=Kmd3aaoLCewsTTBfwHe8Kg&oh=00_Afg73TQcisdu2cGsU1rVikOAJd9RNM_usnsQryW6AScT5A&oe=692500E2", precio: 120 },
-        { nombre: "Champagne Moët & Chandon 750ml", descripcion: "Champagne francés de lujo", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587598557_122100977793128561_8393150100103203269_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EwN98baMLHAQ7kNvwEYlp8D&_nc_oc=Adnzt3vgOSW74kjC5L-KJ4CCw5cn5ngkRW_W0LpTPFTJROMAYmEp11M1_Ea_E5dBvDo&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=JlePNC1ayGZv3SqCfjS6yQ&oh=00_AfhslYxr2WrgDOsjh1Eelbbrv3aPkAbgc78IXLRrt8ntCg&oe=69252465", precio: 180 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585337021_122100977889128561_3521029118944631834_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=UoA8ceDeTIEQ7kNvwGkx6Pi&_nc_oc=AdmfkBgB10EZZkvSqkAYf3SiEQvLsHmF5nM0jngRw9WczowhTneCSWC3RS0SEKdL-Sc&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=tS7maGO_NCRnO15lwfKo-w&oh=00_AfhXHyLWpSqwCpq0boLdtqSs2KmKCe53otc-pVrKRxWi3g&oe=6924FA1C", precio: 65 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585408766_122100977925128561_7420740809293579357_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=_OE-wVbmu3AQ7kNvwFTVNcf&_nc_oc=Adm_6DatJsLpDFFK5LHc97SnRm6aAlTE-cOEPkFB1NoljF9IoLs1GQRpr4XcfiZOOIE&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=nUFkhblQmNTlYQib9WxaBw&oh=00_AfiFp-cHL82np6aQL96ureXvlav_il9xWg6ho4aEBrwocw&oe=692525E1", precio: 65 }
-      ],
-      descuento: 15,
-      campana: "otros"
-    },
-    {
-      id: 7,
-      nombre: "Gomitas",
-      descripcion: "Celebra momentos con los diversos acompañantes o extras que se ofrece solo aqui en tambos.",
-      img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585351344_122100983703128561_2490219976894246539_n.jpg?stp=dst-jpg_p843x403_tt6&_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=e2ym3vlO_CUQ7kNvwFvkfZN&_nc_oc=AdkXIVvGGWk_KqdrZm-gtJAZ8zWm7-YglXcsvHhXv2oXdgHUYhkqw8oMu9htg2DlQ2k&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=ioDqyOr6lBTQ1na-LQ1PVw&oh=00_Afj8C56Wotx-SfGfFOsmuhUjQ-YQpQ9goKLw64W0A0EwiA&oe=69251200",
-      productos: [
-        { nombre: "Whisky Johnnie Walker Black Label 750ml", descripcion: "Whisky escocés de 12 años", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587260307_122100977193128561_1725233762704576028_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=DYXcPGBHCaAQ7kNvwFkXTeA&_nc_oc=Admb3uO5Xbkz2ZIhZeYj3SIBudIxOAg948yLgSm-gnLBp81AS8mwGCqTKOtTgxEYNdw&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=UVmQgkr29223jwjbjhP42w&oh=00_AfjeV4OS1O6Q7vJvpnDgQVm3pwwtnGsn1zPZndivlQzRaA&oe=69252577", precio: 120 },
-        { nombre: "Champagne Moët & Chandon 750ml", descripcion: "Champagne francés de lujo", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/585790656_122100977169128561_491824959543583971_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=X_9bBp6rQFQQ7kNvwHXaNiK&_nc_oc=AdkX7CGj_lVVGh186-6CCTWkKf0t4w2mZ8aDcr_5PSMNObGDbVCtcDdamPxkKTECO4M&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=AVRObqqrhs65_SMRlHGqdA&oh=00_AfjfXUapEIsV62hoZys42sP5jqQXt_ljl_ewh8BjaVgSJw&oe=692522AA", precio: 180 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587252010_122100977187128561_7387965728195258539_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=1PBLHf6EHdoQ7kNvwF3I-6A&_nc_oc=AdlWeQqZlCjh-4SNt2Ol6ZqmPT8pMp5y4nujQ4bQIyjGdeIstjKApcgf2dB7Lpho7dc&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=pC5EFC_SgfGrr0q3J_CKew&oh=00_AfhKdq7itWXXRRqdMQeFXKqxrXT91myrO_974XWUdkg9mg&oe=692520A4", precio: 65 },
-        { nombre: "Pisco Quebranta Premium 750ml", descripcion: "Pisco puro quebranta artesanal", img: "https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/587521736_122100977277128561_1955491823667401521_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=gku37In0O0IQ7kNvwH8R33A&_nc_oc=Adm3cu306ZN7DhzTlItgAGOvHbHCABB6GQ3yNqRgP91No1BVkc-mxy_Nk-ysPSJ7M7o&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=8oJ9OBuL4k78RCmA7YnrMw&oh=00_AfiEMematDRx2luVqNFCWx_kHIVaqtQBuusErNNnTyiMBA&oe=692518E3", precio: 65 }
-      ],
-      descuento: 15,
-      campana: "otros"
-    }
-  ];
-
-  const listaCombos = document.getElementById("listaCombos");
-  const botones = document.querySelectorAll(".filter-btn");
-
-  // --- AGREGAR PRODUCTO AL CARRITO ---
-  function agregarAlCarrito(producto) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-    const existente = carrito.find(p => p.nombre === producto.nombre);
-    if (existente) {
-      existente.cantidad++;
-    } else {
-      producto.cantidad = 1;
-      carrito.push(producto);
-    }
-
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-    // Actualiza contador en el ícono (si lo tienes)
-    const contador = document.getElementById("contadorCarrito");
-    if (contador) contador.textContent = carrito.length;
-  }
-
-  // --- MOSTRAR COMBOS Y PRODUCTOS ---
-  function mostrarCombos(filtro) {
-    listaCombos.innerHTML = "";
-
-    const combosFiltrados = filtro === "todos"
-      ? combos
-      : combos.filter(c => c.campana === filtro);
-
-    if (combosFiltrados.length === 0) {
-      listaCombos.innerHTML = `<p class="text-center text-muted">No hay combos disponibles para esta categoría 😔</p>`;
-      return;
-    }
-
-    combosFiltrados.forEach(combo => {
-      const productosHTML = combo.productos.map(p => `
-        <div class="col-6 col-md-3">
-          <div class="producto-mini-card">
-            <img src="${p.img}" alt="${p.nombre}">
-            <div class="producto-mini-info">
-              <h6>${p.nombre}</h6>
-              <p>${p.descripcion}</p>
-              <span class="precio-mini">S/ ${p.precio}</span>
-              <button class="btn btn-sm agregar-btn" 
-                data-nombre="${p.nombre}" 
-                data-precio="${p.precio}" 
-                data-img="${p.img}">
-                <i class="fas fa-cart-plus"></i> Agregar
-              </button>
-            </div>
-          </div>
-        </div>
-      `).join("");
-
-      const comboHTML = `
-        <div class="combo-card">
-          <div class="combo-card-inner">
-            <div class="combo-image-section">
-              <img src="${combo.img}" alt="${combo.nombre}">
-              <span class="combo-badge">-${combo.descuento}%</span>
-              <span class="campaign-tag tag-${combo.campana}">${combo.campana.toUpperCase()}</span>
-            </div>
-            <div class="combo-content-section">
-              <h3>${combo.nombre}</h3>
-              <p class="combo-description">${combo.descripcion}</p>
-              <div class="row g-3">${productosHTML}</div>
-            </div>
-          </div>
-        </div>
-      `;
-      listaCombos.insertAdjacentHTML("beforeend", comboHTML);
-    });
-
-    // Vincular eventos a los botones recién creados
-    document.querySelectorAll(".agregar-btn").forEach(btn => {
-      btn.addEventListener("click", e => {
-        const producto = {
-          nombre: btn.dataset.nombre,
-          precio: parseFloat(btn.dataset.precio),
-          img: btn.dataset.img
-        };
-        agregarAlCarrito(producto);
-        
-        // Efecto visual en el botón
-        btn.innerHTML = '<i class="fas fa-check"></i> Agregado';
-        btn.style.background = '#28a745';
-        
-        setTimeout(() => {
-          btn.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar';
-          btn.style.background = '';
-        }, 2000);
-      });
-    });
-  }
-
-  // --- FILTRAR POR CAMPAÑA ---
-  window.filtrarCampana = function (campana) {
-    botones.forEach(btn => btn.classList.remove("active"));
-    document.querySelector(`[onclick="filtrarCampana('${campana}')"]`).classList.add("active");
-    mostrarCombos(campana);
-  };
-
-  // Mostrar todos por defecto
-  mostrarCombos("todos");
-});
-</script>
-
 </body>
-
 </html>

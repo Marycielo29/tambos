@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
   <style>
-     .sidebar {
+    .sidebar {
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -61,210 +61,766 @@
     .btn-carrito:hover {
       background: #8B0000;
     }
+
+    /* Estilos para la barra de búsqueda */
+    .search-box {
+      position: relative;
+      width: 300px;
+    }
+
+    .search-box input {
+      border-radius: 25px;
+      padding-right: 45px;
+      border: 2px solid #8B0000;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .search-box input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .search-box input:focus {
+      background: white;
+      color: #333;
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .search-box input:focus::placeholder {
+      color: #666;
+    }
+
+    .search-box button {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #8B0000;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .search-box button:hover {
+      background: #C41E3A;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Resultados de búsqueda */
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+      margin-top: 5px;
+    }
+
+    .search-result-item {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-result-item:hover {
+      background: #f8f9fa;
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    .search-result-info {
+      flex: 1;
+    }
+
+    .search-result-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 2px;
+      font-size: 0.9rem;
+    }
+
+    .search-result-price {
+      color: #8B0000;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .search-result-category {
+      font-size: 0.8rem;
+      color: #666;
+      background: #f1f1f1;
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .no-results {
+      padding: 20px;
+      text-align: center;
+      color: #666;
+    }
+
+    .search-result-item .btn-sm {
+      padding: 3px 10px;
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .search-box {
+        width: 100%;
+        margin: 10px 0;
+      }
+      
+      .search-results {
+        position: fixed;
+        top: 60px;
+        left: 15px;
+        right: 15px;
+        max-height: 300px;
+      }
+    }
+
+    /* Animaciones para notificaciones */
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <i class="fas fa-wine-bottle"></i> TAMBOS
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #8B0000;">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fas fa-wine-bottle"></i> TAMBOS
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
 
-          <!-- Dropdown Categorías -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Categorías
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
-              <li><a class="dropdown-item" href="ron.html">Ron</a></li>
-              <li><a class="dropdown-item" href="pisco.html">Pisco</a></li>
-              <li><a class="dropdown-item" href="whisky.html">Whisky</a></li>
-            </ul>
-          </li>
+        <!-- Dropdown Categorías -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="categoriasDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Categorías
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
+            <li><a class="dropdown-item" href="ron.html">Ron</a></li>
+            <li><a class="dropdown-item" href="pisco.html">Pisco</a></li>
+            <li><a class="dropdown-item" href="whisky.html">Whisky</a></li>
+          </ul>
+        </li>
 
-          <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
-          <li class="nav-item"><a class="nav-link" href="combos.html">Combos</a></li>
-          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link" href="promociones.html">Promociones</a></li>
+        <li class="nav-item"><a class="nav-link" href="combos.html">Combos</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
 
-          <li class="nav-item">
-            <div class="search-box d-none d-lg-block">
-              <input type="text" class="form-control" placeholder="Buscar productos...">
-              <button><i class="fas fa-search"></i></button>
-            </div>
-          </li>
+        <!-- BARRA DE BÚSQUEDA -->
+        <li class="nav-item">
+          <div class="search-box d-none d-lg-block">
+            <input type="text" class="form-control" id="searchInput" 
+                   placeholder="Buscar productos..." 
+                   onkeypress="if(event.key === 'Enter') buscarProductos()">
+            <button onclick="buscarProductos()"><i class="fas fa-search"></i></button>
+            
+            <!-- Resultados de búsqueda -->
+            <div class="search-results" id="searchResults"></div>
+          </div>
+        </li>
 
-          <li class="nav-item ms-3">
-            <div class="cart-icon ">
-              <a class="nav-link" href="carrito.html">🛒 <span id="contadorCarrito" class="badge bg-danger">0</span></a>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <!-- ÍCONO DE USUARIO CON DROPDOWN -->
+<li class="nav-item dropdown ms-3">
+  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+     data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fas fa-user" id="userIcon"></i>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+    <!-- Estado: No logueado -->
+    <div id="userNotLogged">
+      <li><h6 class="dropdown-header">Mi Cuenta</h6></li>
+      <li><a class="dropdown-item" href="login.html">
+        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+      </a></li>
+      <li><a class="dropdown-item" href="registro.html">
+        <i class="fas fa-user-plus"></i> Registrarse
+      </a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="contacto.html">
+        <i class="fas fa-question-circle"></i> Ayuda
+      </a></li>
     </div>
-  </nav>
+    
+    <!-- Estado: Logueado -->
+    <div id="userLogged" style="display: none;">
+      <li><h6 class="dropdown-header" id="userNameDisplay">Usuario</h6></li>
+      <li><a class="dropdown-item" href="mi-cuenta.html">
+        <i class="fas fa-user-circle"></i> Mi Perfil
+      </a></li>
+      <li><a class="dropdown-item" href="#">
+        <i class="fas fa-shopping-bag"></i> Mis Pedidos
+      </a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-danger" href="logout.php">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+      </a></li>
+    </div>
+  </ul>
+</li>
 
-  <div class="container mt-5">
-    <div class="row">
-
-      <!-- 🧭 Sidebar de filtro -->
-      <div class="col-md-3 mb-4">
-        <div class="sidebar">
-          <h5>Filtrar por marca</h5>
-          <select class="form-select mt-3" id="marcaFiltro">
-            <option value="todos">Todos los rones</option>
-            <option value="Bacardi">Bacardi</option>
-            <option value="Cartavio">Cartavio</option>
-            <option value="Flor de Caña">Flor de Caña</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- 🧾 Lista de productos -->
-      <div class="col-md-9">
-        <h2 class="text-center mb-4 text-dark">Rones disponibles</h2>
-        <div class="row" id="listaProductos"></div>
-      </div>
-
+       <!-- ÍCONO DEL CARRITO -->
+      <li class="nav-item ms-3">
+  <div class="cart-icon">
+    <a class="nav-link position-relative" href="carrito.html">
+      <i class="fas fa-shopping-cart fs-5"></i>
+      <span id="contadorCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+    </a>
+  </div>
+</li>
+      </ul>
     </div>
   </div>
+</nav>
 
-  <footer>
-    <div class="container">
-      <div class="row text-center text-md-start">
-        <div class="col-md-3 mb-4">
-          <h5><i class="fas fa-wine-glass-alt"></i> Licorería Tambos</h5>
-          <p>Tu mejor opción en bebidas premium. Ofrecemos los mejores rones, piscos y whiskies al mejor precio y con atención personalizada.</p>
-        </div>
-
-       <div class="col-md-3 mb-4">
-          <h5>Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="catalogo.html"><i class="fas fa-book-open"></i> Catálogo disponible</a></li>
-            <li><a href="https://dashboard.mailerlite.com/preview/1856801/emails/169069249404339219"><i class="fas fa-envelope"></i> Correo masivo</a></li>
-            <li><a href="#"><i class="fas fa-chalkboard"></i> Presentación</a></li>
-            <li><a href="privacidad.html" target="_blank"><i class="fas fa-shield-alt"></i> Política de Privacidad </a></li>
-           <li> <a href="terminos.html"target="_blank"><i class="fas fa-book"></i> Términos y Condiciones</a></li>  
-          </ul>
-        </div>
-
-        <div class="col-md-3 mb-4">
-          <h5>Contáctanos</h5>
-          <p><i class="fas fa-map-marker-alt"></i> Av. Mariscal Castilla 154, Huanta - Ayacucho</p>
-          <p><i class="fas fa-phone"></i> +51 984 328 645</p>
-          <p><i class="fas fa-envelope"></i> contacto@licoreriatambos.pe</p>
-          <div class="social-icons mt-3">
-            <a href="https://www.facebook.com/licoreriatambos" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/licoreriatambos" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/51999888777" target="_blank"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-
-        <div class="col-md-3 mb-4 text-center">
-          <h5>Escanéanos</h5>
-          <p>Realiza tu pedido o paga rápido desde tu móvil.</p>
-          <img src="img/qr.jpg" alt="QR Tambos" class="qr-footer">
-        </div>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Sidebar de filtro -->
+    <div class="col-md-3 mb-4">
+      <div class="sidebar">
+        <h5>Filtrar por marca</h5>
+        <select class="form-select mt-3" id="marcaFiltro">
+          <option value="todos">Todos los rones</option>
+          <option value="Bacardi">Bacardi</option>
+          <option value="Cartavio">Cartavio</option>
+          <option value="Flor de Caña">Flor de Caña</option>
+        </select>
       </div>
     </div>
-    <div class="footer-bottom">
-      &copy; 2025 Licorería Tambos | Todos los derechos reservados.
-      <p>Tomar bebidas alcohólicas en exceso es dañino.</p>
+
+    <!-- Lista de productos -->
+    <div class="col-md-9">
+      <h2 class="text-center mb-4 text-dark">Rones disponibles</h2>
+      <div class="row" id="listaProductos"></div>
     </div>
-  </footer>
+  </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ============================================
+  // DATOS DE PRODUCTOS DE RON
+  // ============================================
+  const productos = [
+    { id: 1, nombre: "CARTA BLANCA", marca: "Bacardi", img: "https://almendariz.com.pe/wp-content/uploads/2022/08/011002008-1.jpg", precioBase: 41, categoria: "Ron" },
+    { id: 2, nombre: "CARTA ORO", marca: "Bacardi", img: "https://almendariz.com.pe/wp-content/uploads/2021/12/011002006-1.jpg", precioBase: 41, categoria: "Ron" },
+    { id: 3, nombre: "RESERVA 8 AÑOS", marca: "Bacardi", img: "https://almendariz.com.pe/wp-content/uploads/2023/08/011002018.jpg", precioBase: 84, categoria: "Ron" },
+    { id: 4, nombre: "CARTAVIO BLANCO", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2025/01/011007009.jpg", precioBase: 26, categoria: "Ron" },
+    { id: 5, nombre: "GRAN SOLERA 15 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/10/011007066.jpg", precioBase: 131, categoria: "Ron" },
+    { id: 6, nombre: "XO 18 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2021/12/CARTAIO-XO.jpg", precioBase: 189, categoria: "Ron" },
+    { id: 7, nombre: "RESERVA 8 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011007050-1.jpg", precioBase: 43, categoria: "Ron" },
+    { id: 8, nombre: "SELECTO 5 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011007035-1.jpg", precioBase: 31, categoria: "Ron" },
+    { id: 9, nombre: "SOLERA 12 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/08/011007004.jpg", precioBase: 85, categoria: "Ron" },
+    { id: 10, nombre: "4 AÑOS BLANCO", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012033-2.jpg", precioBase: 48, categoria: "Ron" },
+    { id: 11, nombre: "ETIQUETA NEGRA 5 AÑOS", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012016-1.jpg", precioBase: 52, categoria: "Ron" },
+    { id: 12, nombre: "GRAN RESERVA 7 AÑOS", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012001-1.jpg", precioBase: 76, categoria: "Ron" },
+    { id: 13, nombre: "ORO 4 AÑOS", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012009-1.jpg", precioBase: 48, categoria: "Ron" }
+  ];
 
-  <script>
-    const productos = [
-      { id: 1, nombre: "CARTA BLANCA", marca: "Bacardi", img: "https://almendariz.com.pe/wp-content/uploads/2022/08/011002008-1.jpg", precioBase: 41 },
-      { id: 2, nombre: "CARTA ORO", marca: "Bacardi", img: "https://almendariz.com.pe/wp-content/uploads/2021/12/011002006-1.jpg", precioBase: 41 },
-      { id: 3, nombre: "RESERVA 8 AÑOS", marca: "Bacardi", img: "https://almendariz.com.pe/wp-content/uploads/2023/08/011002018.jpg", precioBase: 84 },
-      { id: 4, nombre: "CARTAVIO BLANCO", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2025/01/011007009.jpg", precioBase: 26 },
-      { id: 5, nombre: "GRAN SOLERA 15 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/10/011007066.jpg", precioBase: 131 },
-      { id: 6, nombre: "XO 18 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2021/12/CARTAIO-XO.jpg", precioBase: 189 },
-      { id: 7, nombre: "RESERVA 8 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011007050-1.jpg", precioBase: 43 },
-      { id: 8, nombre: "SELECTO 5 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011007035-1.jpg", precioBase: 31 },
-      { id: 9, nombre: "SOLERA 12 AÑOS", marca: "Cartavio", img: "https://almendariz.com.pe/wp-content/uploads/2022/08/011007004.jpg", precioBase: 85 },
-      { id: 10, nombre: "4 AÑOS BLANCO ", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012033-2.jpg", precioBase: 48 },
-      { id: 11, nombre: "ETIQUETA NEGRA 5 AÑOS", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012016-1.jpg", precioBase: 52 },
-      { id: 12, nombre: "GRAN RESERVA 7 AÑOS", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012001-1.jpg", precioBase: 76 },
-      { id: 13, nombre: "ORO 4 AÑOS", marca: "Flor de Caña", img: "https://almendariz.com.pe/wp-content/uploads/2022/05/011012009-1.jpg", precioBase: 48 }
-    ];
-
+  // ============================================
+  // FUNCIONES PARA LA PÁGINA DE RON
+  // ============================================
+  function mostrarProductos(filtro = 'todos') {
     const contenedor = document.getElementById('listaProductos');
-    const filtroMarca = document.getElementById('marcaFiltro');
+    contenedor.innerHTML = '';
+    
+    const productosFiltrados = filtro === 'todos' ? productos : productos.filter(p => p.marca === filtro);
+    
+    productosFiltrados.forEach(prod => {
+      const precio750 = prod.precioBase;
+      const precio300 = (prod.precioBase * 0.5).toFixed(2);
+      const precio1000 = (prod.precioBase * 1.3).toFixed(2);
+      
+      contenedor.innerHTML += `
+      <div class="col-md-4 mb-4 d-flex">
+        <div class="product-card w-100">
+          <img src="${prod.img}" alt="${prod.nombre}">
+          <div class="product-info">
+            <div>
+              <h5>${prod.nombre}</h5>
+              <p><strong>Marca:</strong> ${prod.marca}</p>
+              <label class="form-label">Tamaño:</label>
+              <select class="form-select form-select-sm" id="ml-${prod.id}" onchange="actualizarPrecio(${prod.id}, this.value)">
+                <option value="300">300 ml - S/ ${precio300}</option>
+                <option value="750" selected>750 ml - S/ ${precio750.toFixed(2)}</option>
+                <option value="1000">1 L - S/ ${precio1000}</option>
+              </select>
+              <p id="precio-${prod.id}" class="mt-2 fw-bold text-danger">Precio: S/ ${precio750.toFixed(2)}</p>
+            </div>
+            <button class="btn btn-carrito w-100 mt-2" onclick="agregarCarrito(${prod.id})">
+              <i class="fas fa-cart-plus"></i> Agregar al carrito
+            </button>
+          </div>
+        </div>
+      </div>`;
+    });
+  }
 
-    function mostrarProductos(filtro = 'todos') {
-      contenedor.innerHTML = '';
-      productos.filter(p => filtro === 'todos' || p.marca === filtro)
-        .forEach(prod => {
-          contenedor.innerHTML += `
-          <div class="col-md-4 mb-4 d-flex">
-            <div class="product-card w-100">
-              <img src="${prod.img}" alt="${prod.nombre}">
-              <div class="product-info">
-                <div>
-                  <h5>${prod.nombre}</h5>
-                  <p><strong>Marca:</strong> ${prod.marca}</p>
-                  <label class="form-label">Tamaño:</label>
-                  <select class="form-select form-select-sm" id="ml-${prod.id}" onchange="actualizarPrecio(${prod.id}, this.value)">
-                    <option value="300">300 ml - S/ ${(prod.precioBase * 0.5).toFixed(2)}</option>
-                    <option value="750" selected>750 ml - S/ ${prod.precioBase.toFixed(2)}</option>
-                    <option value="1000">1 L - S/ ${(prod.precioBase * 1.3).toFixed(2)}</option>
-                  </select>
-                  <p id="precio-${prod.id}" class="mt-2 fw-bold text-danger">Precio: S/ ${prod.precioBase.toFixed(2)}</p>
-                </div>
-                <button class="btn btn-carrito w-100 mt-2" onclick="agregarCarrito(${prod.id})">
-                  <i class="fas fa-cart-plus"></i> Agregar al carrito
-                </button>
+  function actualizarPrecio(id, ml) {
+    const producto = productos.find(p => p.id === id);
+    let nuevoPrecio = producto.precioBase;
+    if (ml == 300) nuevoPrecio *= 0.5;
+    if (ml == 1000) nuevoPrecio *= 1.3;
+    document.getElementById(`precio-${id}`).textContent = `Precio: S/ ${nuevoPrecio.toFixed(2)}`;
+  }
+
+  // ============================================
+  // FUNCIONES DEL CARRITO (UNIFICADAS)
+  // ============================================
+  function agregarCarrito(id) {
+    const producto = productos.find(p => p.id === id);
+    const ml = document.getElementById(`ml-${id}`).value;
+    let precio = producto.precioBase;
+    
+    if (ml == 300) precio *= 0.5;
+    if (ml == 1000) precio *= 1.3;
+    
+    // Usar el mismo carrito que la barra de búsqueda
+    let carrito = JSON.parse(localStorage.getItem("carrito_tambos")) || [];
+    
+    // Verificar si el producto ya está en el carrito con el mismo tamaño
+    const productoExistente = carrito.find(item => item.id === id && item.ml === ml);
+    
+    if (productoExistente) {
+      productoExistente.cantidad = (productoExistente.cantidad || 1) + 1;
+    } else {
+      carrito.push({
+        ...producto,
+        ml: ml,
+        precio: precio,
+        cantidad: 1
+      });
+    }
+    
+    localStorage.setItem("carrito_tambos", JSON.stringify(carrito));
+    
+    // Actualizar contador
+    actualizarContadorCarrito();
+    
+    // Mostrar notificación
+    mostrarNotificacion(`${producto.nombre} (${ml} ml) agregado al carrito`);
+  }
+
+  function actualizarContadorCarrito() {
+    const contador = document.getElementById('contadorCarrito');
+    if (contador) {
+      const carrito = JSON.parse(localStorage.getItem("carrito_tambos")) || [];
+      const totalItems = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
+      contador.textContent = totalItems;
+      contador.style.display = totalItems > 0 ? 'inline' : 'none';
+    }
+  }
+
+  function mostrarNotificacion(mensaje) {
+    const notificacion = document.createElement('div');
+    notificacion.className = 'alert alert-success position-fixed';
+    notificacion.style.cssText = `
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      min-width: 300px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: slideIn 0.3s ease;
+    `;
+    notificacion.innerHTML = `
+      <div class="d-flex align-items-center">
+        <i class="fas fa-check-circle me-2"></i>
+        <span>${mensaje}</span>
+      </div>
+    `;
+    
+    document.body.appendChild(notificacion);
+    
+    setTimeout(() => {
+      notificacion.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => notificacion.remove(), 300);
+    }, 3000);
+  }
+
+  // ============================================
+  // FUNCIONES DE BÚSQUEDA (ACTUALIZADAS)
+  // ============================================
+  const productosTambos = [
+    ...productos, // Incluye los rones de esta página
+    {
+      id: 101,
+      nombre: "Whisky Johnnie Walker",
+      categoria: "Whisky",
+      precio: 120.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2021/12/015018001-2.jpg",
+      descripcion: "Whisky escocés"
+    },
+    {
+      id: 102,
+      nombre: "Pisco Quebranta",
+      categoria: "Pisco",
+      precio: 45.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2021/12/010060005-1.jpg",
+      descripcion: "Pisco puro quebranta"
+    },
+    {
+      id: 103,
+      nombre: "Vino Tinto Rose",
+      categoria: "Vino",
+      precio: 16.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2022/08/013263009-1.jpg",
+      descripcion: "Vino tinto premium"
+    },
+    {
+      id: 104,
+      nombre: "Cerveza Pilsen",
+      categoria: "Cerveza",
+      precio: 8.00,
+      imagen: "https://almendariz.com.pe/wp-content/uploads/2022/05/SIX-PACK-CERVEZA-PILSEN-X-310-ML.jpg",
+      descripcion: "Cerveza lager"
+    }
+  ];
+
+  function buscarProductos() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const query = searchInput.value.trim().toLowerCase();
+    
+    if (!query) {
+      searchResults.style.display = 'none';
+      return;
+    }
+    
+    const resultados = productosTambos.filter(producto => 
+      producto.nombre.toLowerCase().includes(query) ||
+      producto.categoria.toLowerCase().includes(query) ||
+      (producto.descripcion && producto.descripcion.toLowerCase().includes(query))
+    );
+    
+    if (resultados.length > 0) {
+      let html = '';
+      resultados.forEach(producto => {
+        html += `
+          <div class="search-result-item" onclick="seleccionarProducto(${producto.id})">
+            <img src="${producto.imagen || producto.img}" alt="${producto.nombre}" class="search-result-img">
+            <div class="search-result-info">
+              <div class="search-result-name">${producto.nombre}</div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="search-result-price">S/ ${(producto.precio || producto.precioBase || 0).toFixed(2)}</span>
+                <span class="search-result-category">${producto.categoria}</span>
               </div>
             </div>
-          </div>`;
+            <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); agregarAlCarritoBusqueda(${producto.id})">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
+        `;
+      });
+      searchResults.innerHTML = html;
+      searchResults.style.display = 'block';
+    } else {
+      searchResults.innerHTML = `
+        <div class="no-results">
+          <i class="fas fa-search fa-2x mb-3 text-muted"></i>
+          <p>No se encontraron productos</p>
+          <p class="small">Intenta con otra palabra clave</p>
+        </div>
+      `;
+      searchResults.style.display = 'block';
+    }
+  }
+
+  function agregarAlCarritoBusqueda(id) {
+    const producto = productosTambos.find(p => p.id === id);
+    if (producto) {
+      // Agregar al carrito usando la misma función
+      let carrito = JSON.parse(localStorage.getItem("carrito_tambos")) || [];
+      
+      const productoExistente = carrito.find(item => item.id === id);
+      
+      if (productoExistente) {
+        productoExistente.cantidad = (productoExistente.cantidad || 1) + 1;
+      } else {
+        carrito.push({
+          ...producto,
+          cantidad: 1,
+          ml: '750', // Valor por defecto
+          precio: producto.precio || producto.precioBase
         });
+      }
+      
+      localStorage.setItem("carrito_tambos", JSON.stringify(carrito));
+      
+      // Actualizar contador
+      actualizarContadorCarrito();
+      
+      // Mostrar notificación
+      mostrarNotificacion(`✅ ${producto.nombre} agregado al carrito`);
+      
+      // Limpiar búsqueda
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchResults').style.display = 'none';
     }
+  }
 
-    function actualizarPrecio(id, ml) {
-      const producto = productos.find(p => p.id === id);
-      let nuevoPrecio = producto.precioBase;
-      if (ml == 300) nuevoPrecio *= 0.5;
-      if (ml == 1000) nuevoPrecio *= 1.3;
-      document.getElementById(`precio-${id}`).textContent = `Precio: S/ ${nuevoPrecio.toFixed(2)}`;
+  function seleccionarProducto(id) {
+    const producto = productosTambos.find(p => p.id === id);
+    if (producto) {
+      // Redirigir a la página correcta según la categoría
+      const paginas = {
+        'Ron': 'ron.html',
+        'Whisky': 'whisky.html',
+        'Pisco': 'pisco.html',
+        'Vino': 'vino.html',
+        'Cerveza': 'cerveza.html'
+      };
+      
+      const pagina = paginas[producto.categoria] || 'index.html';
+      window.location.href = pagina;
+      
+      // Limpiar búsqueda
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchResults').style.display = 'none';
     }
+  }
 
-    function agregarCarrito(id) {
-      const producto = productos.find(p => p.id === id);
-      const ml = document.getElementById(`ml-${id}`).value;
-      let precio = producto.precioBase;
-      if (ml == 300) precio *= 0.5;
-      if (ml == 1000) precio *= 1.3;
+  // ============================================
+  // FUNCIONES DE USUARIO
+  // ============================================
+  function estaLogueado() {
+    return localStorage.getItem('usuario_tambos') !== null;
+  }
 
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-      carrito.push({ ...producto, ml, precio, cantidad: 1 });
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+  function obtenerUsuario() {
+    const usuario = localStorage.getItem('usuario_tambos');
+    return usuario ? JSON.parse(usuario) : null;
+  }
 
-      actualizarContador();
-      alert(`✅ ${producto.nombre} (${ml} ml) agregado al carrito`);
+  function cerrarSesion() {
+    if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+      localStorage.removeItem('usuario_tambos');
+      actualizarEstadoUsuario();
+      window.location.href = 'index.html';
     }
+  }
 
-    function actualizarContador() {
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-      document.getElementById("contadorCarrito").textContent = carrito.length;
+  function actualizarEstadoUsuario() {
+    const usuario = obtenerUsuario();
+    const userNotLogged = document.getElementById('userNotLogged');
+    const userLogged = document.getElementById('userLogged');
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const userIcon = document.getElementById('userIcon');
+    
+    if (usuario) {
+      if (userNotLogged) userNotLogged.style.display = 'none';
+      if (userLogged) userLogged.style.display = 'block';
+      if (userNameDisplay) userNameDisplay.textContent = usuario.nombre ? usuario.nombre.split(' ')[0] : 'Usuario';
+      if (userIcon) {
+        userIcon.className = 'fas fa-user-check';
+        userIcon.style.color = '#4CAF50';
+      }
+    } else {
+      if (userNotLogged) userNotLogged.style.display = 'block';
+      if (userLogged) userLogged.style.display = 'none';
+      if (userIcon) {
+        userIcon.className = 'fas fa-user';
+        userIcon.style.color = '';
+      }
     }
+  }
 
-    filtroMarca.addEventListener('change', e => mostrarProductos(e.target.value));
+  // ============================================
+  // INICIALIZACIÓN
+  // ============================================
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mostrar productos
     mostrarProductos();
-    actualizarContador();
-  </script>
+    
+    // Configurar filtro
+    const filtroMarca = document.getElementById('marcaFiltro');
+    if (filtroMarca) {
+      filtroMarca.addEventListener('change', e => mostrarProductos(e.target.value));
+    }
+    
+    // Actualizar contador del carrito
+    actualizarContadorCarrito();
+    
+    // Actualizar estado del usuario
+    actualizarEstadoUsuario();
+    
+    // Configurar búsqueda en tiempo real
+    const searchInput = document.getElementById('searchInput');
+    let searchTimeout;
+    
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(buscarProductos, 300);
+      });
+      
+      searchInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          this.value = '';
+          document.getElementById('searchResults').style.display = 'none';
+        }
+      });
+    }
+    
+    // Cerrar resultados al hacer clic fuera
+    document.addEventListener('click', function(event) {
+      const searchBox = document.querySelector('.search-box');
+      const searchResults = document.getElementById('searchResults');
+      
+      if (searchResults && searchBox && !searchBox.contains(event.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+  });
+</script>
+   <script>
+    // ============================================
+    // VERIFICACIÓN DE SESIÓN
+    // ============================================
+    async function actualizarEstadoUsuarioPromocion() {
+        try {
+            const response = await fetch('verificar_sesion.php');
+            const data = await response.json();
+            
+            const userNotLogged = document.getElementById('userNotLogged');
+            const userLogged = document.getElementById('userLogged');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userIcon = document.getElementById('userIcon');
+            
+            if (data.logged_in) {
+                // Usuario logueado
+                if (userNotLogged) userNotLogged.style.display = 'none';
+                if (userLogged) userLogged.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = data.cliente.nombre.split(' ')[0];
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user-check';
+                    userIcon.style.color = '#28a745';
+                }
+            } else {
+                // Usuario no logueado
+                if (userNotLogged) userNotLogged.style.display = 'block';
+                if (userLogged) userLogged.style.display = 'none';
+                if (userIcon) {
+                    userIcon.className = 'fas fa-user';
+                    userIcon.style.color = '';
+                }
+            }
+        } catch (error) {
+            console.error('Error al verificar sesión:', error);
+        }
+    }
+
+    // ============================================
+    // FUNCIÓN DE CERRAR SESIÓN
+    // ============================================
+    function cerrarSesion() {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+            window.location.href = 'logout.php';
+        }
+    }
+
+    // ============================================
+    // LLAMAR A LA VERIFICACIÓN AL CARGAR LA PÁGINA
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Actualizar estado del usuario
+        await actualizarEstadoUsuarioPromocion();
+        
+        // Configurar botón de cerrar sesión
+        const btnCerrarSesion = document.querySelector('[onclick*="cerrarSesion"]');
+        if (btnCerrarSesion) {
+            btnCerrarSesion.onclick = cerrarSesion;
+        }
+    });
+    </script>
+
+    <footer>
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="col-md-3 mb-4">
+        <h5><i class="fas fa-wine-glass-alt"></i> Licorería Tambos</h5>
+        <p>Tu mejor opción en bebidas premium. Ofrecemos los mejores rones, piscos y whiskies al mejor precio y con atención personalizada.</p>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <h5>Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="catalogo.html"><i class="fas fa-book-open"></i> Catálogo disponible</a></li>
+          <li><a href="https://dashboard.mailerlite.com/preview/1856801/emails/169069249404339219"><i class="fas fa-envelope"></i> Correo masivo</a></li>
+          <li><a href="blog.html"><i class="fas fa-chalkboard"></i> Presentación</a></li>
+          <li><a href="privacidad.html" target="_blank"><i class="fas fa-shield-alt"></i> Política de Privacidad </a></li>
+          <li> <a href="terminos.html" target="_blank"><i class="fas fa-book"></i> Términos y Condiciones</a></li>  
+        </ul>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <h5>Contáctanos</h5>
+        <p><i class="fas fa-map-marker-alt"></i> Av. Mariscal Castilla 154, Huanta - Ayacucho</p>
+        <p><i class="fas fa-phone"></i> +51 984 328 645</p>
+        <p><i class="fas fa-envelope"></i> contacto@licoreriatambos.pe</p>
+        <div class="social-icons mt-3">
+          <a href="https://www.facebook.com/licoreriatambos" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/licoreriatambos" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/51999888777" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4 text-center">
+        <h5>Escanéanos</h5>
+        <p>Realiza tu pedido o paga rápido desde tu móvil.</p>
+        <img src="img/qr.jpg" alt="QR Tambos" class="qr-footer">
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 Licorería Tambos | Todos los derechos reservados.
+    <p>Tomar bebidas alcohólicas en exceso es dañino.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

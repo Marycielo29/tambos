@@ -1,0 +1,218 @@
+<script>
+let carrito = [];
+let cliente = null;
+let metodoPago = 'contra_entrega';
+
+// Cargar datos al iniciar
+document.addEventListener('DOMContentLoaded', async function() {
+    // Primero verificar que tenga productos en el carrito
+    cargarCarrito();
+    
+    if (carrito.length === 0) {
+        // Si el carrito está vacío, mostrar mensaje
+        document.getElementById('carritoVacio').style.display = 'block';
+        document.getElementById('checkoutContenido').style.display = 'none';
+        return;
+    }
+    
+    // Verificar sesión ANTES de mostrar contenido
+    const estaLogueado = await verificarSesion();
+    
+    if (!estaLogueado) {
+        // Si no está logueado, NO mostrar checkout, redirigir a login
+        mostrarMensajeLoginRequerido();
+        return;
+    }
+    
+    // Si está logueado y tiene productos, mostrar checkout
+    cargarDatosCliente();
+    calcularTotales();
+});
+
+// Función para mostrar mensaje de login requerido
+<!-- Reemplaza la función mostrarMensajeLoginRequerido() con esto: -->
+function mostrarMensajeLoginRequerido() {
+    const contenido = document.getElementById('checkoutContenido');
+    
+    // Calcular resumen
+    let subtotal = 0;
+    let htmlProductos = '';
+    
+    carrito.forEach(producto => {
+        const cantidad = producto.cantidad || 1;
+        const totalProducto = producto.precio * cantidad;
+        subtotal += totalProducto;
+        
+        htmlProductos += `
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <span class="fw-medium">${producto.nombre}</span>
+                    <br>
+                    <small class="text-muted">${cantidad} x S/ ${producto.precio.toFixed(2)}</small>
+                </div>
+                <span class="fw-bold">S/ ${totalProducto.toFixed(2)}</span>
+            </div>
+        `;
+    });
+    
+    const envio = 10.00;
+    const total = subtotal + envio;
+    
+    contenido.innerHTML = `
+        <div class="checkout-card">
+            <div class="checkout-header" style="background: linear-gradient(135deg, #ff9800, #ff5722);">
+                <h2><i class="fas fa-exclamation-triangle me-2"></i> ¡Un paso más!</h2>
+            </div>
+            <div class="checkout-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-shopping-cart fa-4x text-warning mb-3"></i>
+                    <h3 class="mb-3">Tu pedido está casi listo</h3>
+                    <p class="text-muted">Tienes <strong>${carrito.length} producto(s)</strong> en tu carrito por un total de <strong>S/ ${total.toFixed(2)}</strong></p>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="fas fa-boxes me-2"></i> Resumen de tu pedido</h5>
+                    </div>
+                    <div class="card-body">
+                        ${htmlProductos}
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span>Subtotal:</span>
+                            <span>S/ ${subtotal.toFixed(2)}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Envío:</span>
+                            <span>S/ ${envio.toFixed(2)}</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold fs-5 mt-2">
+                            <span>Total a pagar:</span>
+                            <span class="text-primary">S/ ${total.toFixed(2)}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <div class="d-flex">
+                        <i class="fas fa-info-circle fa-2x me-3 mt-1"></i>
+                        <div>
+                            <h5 class="alert-heading">¿Por qué necesito una cuenta?</h5>
+                            <p class="mb-2">Con una cuenta podrás:</p>
+                            <ul class="mb-0">
+                                <li>Realizar seguimiento de tus pedidos</li>
+                                <li>Guardar tu dirección para futuras compras</li>
+                                <li>Recibir ofertas exclusivas</li>
+                                <li>Ver tu historial de compras</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <h5 class="mb-3">Elige una opción para continuar:</h5>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <a href="login.html?redirect=checkout.html" class="btn btn-primary btn-lg py-3">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fas fa-sign-in-alt fa-2x me-3"></i>
+                                <div class="text-start">
+                                    <div class="fw-bold fs-5">Ya tengo cuenta</div>
+                                    <small>Inicia sesión con tu email</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="registro.html?redirect=checkout.html" class="btn btn-success btn-lg py-3">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user-plus fa-2x me-3"></i>
+                                <div class="text-start">
+                                    <div class="fw-bold fs-5">Crear cuenta nueva</div>
+                                    <small>Regístrate en 1 minuto</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="carrito.html" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i> Volver al carrito
+                        </a>
+                        <a href="index.html" class="btn btn-link text-muted ms-2">
+                            Seguir comprando
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Mostrar resumen de productos en el carrito
+function mostrarResumenCarrito() {
+    const contenedor = document.getElementById('resumenCarrito');
+    
+    if (carrito.length === 0) return;
+    
+    let html = '<div class="list-group">';
+    let subtotal = 0;
+    
+    carrito.forEach(producto => {
+        const cantidad = producto.cantidad || 1;
+        const precioTotal = producto.precio * cantidad;
+        subtotal += precioTotal;
+        
+        html += `
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">${producto.nombre}</h6>
+                        <small class="text-muted">${cantidad} x S/ ${producto.precio.toFixed(2)}</small>
+                    </div>
+                    <span class="fw-bold">S/ ${precioTotal.toFixed(2)}</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    const total = subtotal + 10; // + envío
+    
+    html += `
+        <div class="list-group-item bg-light">
+            <div class="d-flex justify-content-between">
+                <span>Subtotal:</span>
+                <span>S/ ${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span>Envío:</span>
+                <span>S/ 10.00</span>
+            </div>
+            <hr class="my-2">
+            <div class="d-flex justify-content-between fw-bold">
+                <span>Total:</span>
+                <span>S/ ${total.toFixed(2)}</span>
+            </div>
+        </div>
+    `;
+    
+    contenedor.innerHTML = html;
+}
+
+// Verificar que el usuario esté logueado
+async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.logged_in) {
+            cliente = data.cliente;
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.error('Error al verificar sesión:', error);
+        return false;
+    }
+}
+
+// Resto del código permanece igual...
+// (las funciones cargarCarrito, mostrarProductos, cargarDatosCliente, etc.)
+</script>
