@@ -2,7 +2,7 @@
 session_start();
 
 // Configuración básica (la misma que en config.php)
-const BASE_URL = 'http://localhost/tambos/';
+const BASE_URL = 'http://localhost:8888/tambos/';
 
 // Destruir todas las variables de sesión
 $_SESSION = array();

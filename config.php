@@ -5,7 +5,7 @@ session_start();
 const BD_HOST = 'localhost';
 const BD_NAME = 'tambos_db';
 const BD_USER = 'root';
-const BD_PASSWORD = ''; // Cambia si es diferente
+const BD_PASSWORD = 'root'; // Cambia si es diferente
 const BD_CHARSET = 'utf8mb4';
 
 // Conexión a la base de datos

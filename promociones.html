@@ -162,21 +162,26 @@
 
     /* Imagen con efecto */
     .product-image-wrapper {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 1 / 1;
-    }
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;   /* ✅ CUADRADO PERFECTO */
+  overflow: hidden;
+  background: #f5f5f5;  /* Fondo limpio cuando la imagen es vertical */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .product-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
+.product-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* ✅ IMAGEN COMPLETA, SIN RECORTE */
+  transition: transform 0.5s ease;
+}
 
-    .product-card:hover img {
-      transform: scale(1.15) rotate(2deg);
-    }
+.product-card:hover img {
+  transform: scale(1.08);   /* Zoom suave sin romper bordes */
+}
 
     /* Badge de descuento */
     .discount-badge {
@@ -939,9 +944,9 @@
     const productosPromociones = [
       {
         id: 101,
-        nombre: "Ron Bacardi Blanco",
-        descripcion: "Clásico ron caribeño suave ideal para cócteles.",
-        imagen: "https://images.unsplash.com/photo-1609428035459-58d9d47f9d87",
+        nombre: "Promocion x3",
+        descripcion: "LLevate 3 four lokos  solo ppor la paga de dos",
+        imagen: "https://scontent.flim2-2.fna.fbcdn.net/v/t39.30808-6/594402831_122107889811128561_2273440552115237977_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHWPHoDJ-jMwdKzTtD2vo8CHqloU2EVL60eqWhTYRUvrXYNhgyAssdvK3HpcD-n7TvvFCT_DoSGK7adPO_BoxJY&_nc_ohc=i2OlVse_Bx0Q7kNvwGIm4JG&_nc_oc=AdluWJ-NKdx4Sy9eu2ED_58AqBH6HY-EQqiwRcQT1l8BXx8lDMz1-YocU_ymOA5NaldQtckTVDgY4LUTrjKrltAn&_nc_zt=23&_nc_ht=scontent.flim2-2.fna&_nc_gid=VGe1j8tDeBMz_o2CEDSLZg&oh=00_Afk8pZFWE2mwNYnuGr9JoeIkhjbtboJEoupFCNHBzVckyw&oe=693779AE",
         precio: 40.00,
         precioAnterior: 55.00,
         descuento: 27,
@@ -949,9 +954,9 @@
       },
       {
         id: 102,
-        nombre: "Pisco Quebranta 500ml",
-        descripcion: "Pisco artesanal de uva quebranta, sabor intenso.",
-        imagen: "https://images.unsplash.com/photo-1617131206637-cd5d8eebdd6b",
+        nombre: "Super promo",
+        descripcion: "Por la compra de un ruskaya azul llevate dos monsters gratis",
+        imagen: "https://scontent.flim2-2.fna.fbcdn.net/v/t39.30808-6/593714536_122107889847128561_5255227934002179377_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeF4-xTkllshCtuNMYJ5mQhaPLfp3kmtwyI8t-neSa3DInpP-cwEOVxeq8wNN-LdJNxgGgzwRycHDrteeaWMM3ai&_nc_ohc=1x1MOfuTaBkQ7kNvwGUTTQB&_nc_oc=Adk2rxSgM377KAGAw9lrUrCEwRJRjHSOp9_ps8zqyYjRDflqrV3Tf-5LmG9iZYRHog-OwSZcTySst9QI-g9hYUKw&_nc_zt=23&_nc_ht=scontent.flim2-2.fna&_nc_gid=M3S8Yc0RhIdH5fDa-_l1Mw&oh=00_AfmNj0JX-XxXPdiXrzWz-T4lOUi63WzqgWLq2etUXuD1tw&oe=69374DF6",
         precio: 55.00,
         precioAnterior: 70.00,
         descuento: 21,
@@ -959,43 +964,13 @@
       },
       {
         id: 103,
-        nombre: "Whisky Johnnie Walker Black",
-        descripcion: "Whisky escocés de sabor profundo y ahumado.",
-        imagen: "https://images.unsplash.com/photo-1606787366850-de6330128bfc",
+        nombre: "Promocion vip",
+        descripcion: "La mejor combinacion llevate solo por este mes un vino y dos four lokos a solo mitad de precio",
+        imagen: "https://scontent.flim2-4.fna.fbcdn.net/v/t39.30808-6/593873387_122107889757128561_7541820788793524110_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFAF9FeD2BRlns7Nhq9ogtWEdLTOKFfNhQR0tM4oV82FPAb_dfs1pill5do0gFzlHiirif9zKmBVVP5yzVsvLwd&_nc_ohc=k9PeW7QbrtQQ7kNvwEO3bBw&_nc_oc=AdncD6XxO0g14eeJY4aMD0N2v98vZ8Yyz1YBos33jm7LFSH5XZ99vYnP95Q6mvnajT0IVSMNQLqPfbSSau7AFb-b&_nc_zt=23&_nc_ht=scontent.flim2-4.fna&_nc_gid=vbCODD_CGj89vWyeLI604g&oh=00_Afl7cw1FrzErGOq4OBl9oKoz6gjkmU8o_9XT4MVIeebuiQ&oe=69375324",
         precio: 120.00,
         precioAnterior: 150.00,
         descuento: 20,
         categoria: "Whisky"
-      },
-      {
-        id: 104,
-        nombre: "Vodka Absolut",
-        descripcion: "Vodka premium sueco, perfecto para tragos.",
-        imagen: "https://images.unsplash.com/photo-1629731687428-8c0d5dcb6d20",
-        precio: 65.00,
-        precioAnterior: 85.00,
-        descuento: 24,
-        categoria: "Vodka"
-      },
-      {
-        id: 105,
-        nombre: "Tequila José Cuervo",
-        descripcion: "Tequila reposado, auténtico sabor mexicano.",
-        imagen: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32",
-        precio: 75.00,
-        precioAnterior: 95.00,
-        descuento: 21,
-        categoria: "Tequila"
-      },
-      {
-        id: 106,
-        nombre: "Gin Beefeater",
-        descripcion: "Gin londinense premium, ideal para Gin Tonic.",
-        imagen: "https://images.unsplash.com/photo-1536935338788-846bb9981813",
-        precio: 85.00,
-        precioAnterior: 110.00,
-        descuento: 23,
-        categoria: "Gin"
       }
     ];
 
@@ -1078,7 +1053,7 @@
               <div class="product-image-wrapper">
                 <div class="promo-tag">🏷️ OFERTA</div>
                 <div class="discount-badge">-${prod.descuento}%</div>
-                <img src="${prod.imagen}" alt="${prod.nombre}" style="width: 100%; height: 250px; object-fit: cover;">
+                <img src="${prod.imagen}" alt="${prod.nombre}">
               </div>
               <div class="product-info">
                 <h5>${prod.nombre}</h5>
